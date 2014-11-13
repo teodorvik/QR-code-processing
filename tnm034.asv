@@ -1,0 +1,12 @@
+% Tills när vi vill prova många bilder. Just nu
+% hårdkodar vi bilden.
+%
+% function[strout] = tnm034(image)
+
+image = im2double(imread('images/set1/Bygg_1.png'));
+
+
+% Hitta FIP och ta ut centrum punkten för varje FIP
+objects = ObjectDetection(image, 'HaarCascades/haarcascade_frontalface_alt.mat', 0);
+
+
