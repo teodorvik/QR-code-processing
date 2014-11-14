@@ -25,7 +25,7 @@ objects = ObjectDetection(image, filename, 0);
 
 % Oscar
 % Skapa en 41*41 matris av alla punkter efter rotation och translation.
-% QR_data = scale(FIP_rotated);
+% QR_data = CreateMatrix(FIP_rotated);
 
 % 
 % Få ut text från perfekta punkter genom att läsa av QR_data pixel för pixel.
