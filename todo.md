@@ -4,7 +4,7 @@ TO DO
 ## Teodor, Mikael
 Beräkna position av FIP:arna
 
-# Strategi
+#### Strategi
 https://www.inf.u-szeged.hu/ipcg/publications/papers/KatonaNyulISMM2013.pdf
 http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5403098
 
