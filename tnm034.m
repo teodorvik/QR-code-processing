@@ -15,8 +15,9 @@ objects = ObjectDetection(image, filename, 0);
 
 % Beräkna position av FIP:arna
 
-% Transformera/Rotera bilden efter position av FIP:arna
+% Räkna ut rotation och translation vid givna FIP:ar.
 
 % Gör om till gråskala
+% Skapa en matris av alla punkter efter rotation och translation.
 
-% Extrahera informationen
+% Få ut text från perfekta punkter.
