@@ -11,19 +11,24 @@ image = im2double(imread('images/set1/Bygg_1.png'));
 filename = 'HaarCascades/haarcascade_frontalface_alt.mat';
 objects = ObjectDetection(image, filename, 0);
 
-% Välj ut FIP
-
+% Teodor
 % Beräkna position av FIP:arna
-%
 % FIP_positions = []
 
+% Mikael
 % Räkna ut rotation och translation vid givna FIP:ar.
-% Gör om till gråskala
-% Skapa en 41*41 matris av alla punkter efter rotation och translation.
-%
-% QR_data = translate(FIP_positions);
+% FIP_rotated = rotate(FIP_positions);
 
-% Få ut text från perfekta punkter.
-% Sätt strout till texten
 %
+% Gör om till gråskala
+% Linjär interpolation mellan färgerna på FIParna
+
+% Oscar
+% Skapa en 41*41 matris av alla punkter efter rotation och translation.
+% QR_data = scale(FIP_rotated);
+
+% 
+% Få ut text från perfekta punkter genom att läsa av QR_data pixel för pixel.
+% Konvertera till ASCII
+% Sätt strout till texten
 % strout = readQR(QR_data);
