@@ -2,9 +2,9 @@ TO DO
 =====
 
 ### Teodor, Mikael
-Beräkna position av FIP:arna
+Calculate positions of the FIP:s.
 
-##### Strategi:
+##### Strategy:
 https://www.inf.u-szeged.hu/ipcg/publications/papers/KatonaNyulISMM2013.pdf
 http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5403098
 
@@ -17,19 +17,19 @@ http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5403098
 FIP_positions = []
 
 ### Mikael
-Räkna ut rotation och translation vid givna FIP:ar.
+Calculate rotation and translation at the given FIP:s.
 FIP_rotated = rotate(FIP_positions);
 
 ### Oscar
-Gör om till gråskala
-Kompensera för ojämn belysning
+Convert to grayscale.
+Compensate for uneven illumination.
 
 ### Oscar
-Skapa en 41*41 matris av alla punkter efter rotation och translation.
+Create a 41*41 matrix of all points after rotation and translation.
 QR_data = CreateBitmap(FIP_rotated);
 
 ### Anton
-Få ut text från perfekta punkter genom att läsa av QR_data pixel för pixel.
-Konvertera till ASCII
-Sätt strout till texten
+Determine text from perfect points by reading QR_data pixel by pixel.
+Convert to ASCII symbols.
+Put strout as the resulting text.
 strout = readQR(QR_data);
