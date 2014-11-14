@@ -21,7 +21,7 @@ objects = ObjectDetection(image, filename, 0);
 
 % Oscar
 % Gör om till gråskala
-% Linjär interpolation mellan färgerna på FIParna
+% Kompensera för ojämn belysning
 
 % Oscar
 % Skapa en 41*41 matris av alla punkter efter rotation och translation.
