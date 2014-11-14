@@ -14,10 +14,16 @@ objects = ObjectDetection(image, filename, 0);
 % Välj ut FIP
 
 % Beräkna position av FIP:arna
+%
+% FIP_positions = []
 
 % Räkna ut rotation och translation vid givna FIP:ar.
-
 % Gör om till gråskala
-% Skapa en matris av alla punkter efter rotation och translation.
+% Skapa en 41*41 matris av alla punkter efter rotation och translation.
+%
+% QR_data = translate(FIP_positions);
 
 % Få ut text från perfekta punkter.
+% Sätt strout till texten
+%
+% strout = readQR(QR_data);
