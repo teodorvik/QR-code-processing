@@ -5,15 +5,9 @@
 
 image = im2double(imread('images/set1/Bygg_1.png'));
 
-% Hitta intressanta punkter m.h.a. Viola-Jones och deras Haar figurer.
-% Letar efter ansikten just nu. Det ska det inte göra. Vi måste hitta en annan fil
-% att kolla efter.
-filename = 'HaarCascades/haarcascade_frontalface_alt.mat';
-objects = ObjectDetection(image, filename, 0);
-
 % Teodor
 % Beräkna position av FIP:arna
-% FIP_positions = []
+% FIP_positions = GetFIPPositions();
 
 % Mikael
 % Räkna ut rotation och translation vid givna FIP:ar.
