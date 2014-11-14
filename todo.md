@@ -8,10 +8,10 @@ Beräkna position av FIP:arna
 https://www.inf.u-szeged.hu/ipcg/publications/papers/KatonaNyulISMM2013.pdf
 http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5403098
 
-* Gaussian smoothing
-* Gradient calculation (sobel)
-* Binarization
-* Line sweep, get FIP candidates
+1. Gaussian smoothing
+2. Gradient calculation (sobel)
+3. Binarization
+4. Line sweep, get FIP candidates
 
 #### Output:
 FIP_positions = []
