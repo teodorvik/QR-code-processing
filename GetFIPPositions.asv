@@ -4,7 +4,7 @@
 % function FIP_positions = GetFIPPositions()
 
 image = im2double(imread('images/set1/Bygg_3.png'));
-
+s
 %% Apply Gaussian smoothing
 %# Create the gaussian filter with hsize = [5 5] and sigma = 2
 G = fspecial('gaussian',[10 10],2);
@@ -14,13 +14,7 @@ Ig = imfilter(image,G,'same');
 imshow(Ig) 
 
 %% Apply sobel filters in both directions
-sobel_x = [-1, -2, -1; 0, 0, 0; 1, 2, 1];
-sobel_y = [1, 2, 1; 0, 0, 0; -1, -2, -1];
-
-filtered_x = filter2(sobel_x,image);
-filtered_y = filter2(sobel_y,image);
-
-filtered_image = sqrt(filtered_x.^2) + sqrt(filtered_y.^2);
+edge_
 
 %%
 imshow(filtered_image)
