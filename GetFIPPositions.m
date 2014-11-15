@@ -5,6 +5,14 @@
 
 image = im2double(imread('images/set1/Bygg_3.png'));
 
+%% Apply Gaussian smoothing
+%# Create the gaussian filter with hsize = [5 5] and sigma = 2
+G = fspecial('gaussian',[10 10],5);
+%# Filter it
+Ig = filter2(G, image);
+%# Display
+imshow(Ig) 
+
 %% Apply sobel filters in both directions
 sobel_x = [-1, -2, -1; 0, 0, 0; 1, 2, 1];
 sobel_y = [1, 2, 1; 0, 0, 0; -1, -2, -1];
