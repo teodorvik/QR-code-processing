@@ -7,7 +7,12 @@ image = im2double(imread('images/set1/Bygg_3.png'));
 
 %% Apply sobel filters in both directions
 
-edge_image = sobel(image, 0.95);
+edgeImage = Sobel(image, 0.95);
+%imshow(edgeImage)
 
-%%
-imshow(edge_image)
+%% Search for FIP
+
+fipPoints = FIPLineScan(edgeImage);
+imshow(edgeImage);
+hold on;
+plot(fipPoints(:,2), fipPoints(:,1), 'x');
