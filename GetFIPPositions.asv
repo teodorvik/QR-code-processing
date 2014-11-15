@@ -3,23 +3,11 @@
 % Output: FIP_positions [4,2]
 % function FIP_positions = GetFIPPositions()
 
-% Hitta intressanta punkter m.h.a. Viola-Jones och deras Haar figurer.
-% Letar efter ansikten just nu. Det ska det inte göra. Vi måste hitta en annan fil
-% att kolla efter.
+image = im2double(imread('images/set1/Bygg_3.png'));
 
-% filename = 'HaarCascades/haarcascade_frontalface_alt.mat';
-% objects = ObjectDetection(image, filename, 0);
+%% Apply sobel filters in both directions
 
-image = im2double(imread('images/set1/Bygg_1.png'));
+edge_
 
-% Apply sobel filters in both directions
-sobel_x = [-1, -2, -1; 0, 0, 0; 1, 2, 1];
-sobel_y = [1, 2, 1; 0, 0, 0; -1, -2, -1];
-
-filtered_x = filter2(sobel_x,image);
-filtered_y = filter2(sobel_y,image);
-
-filtered_image = sqrt(filtered_x.^2 + filtered_y.^2) ;
-
-
+%%
 imshow(filtered_image)
