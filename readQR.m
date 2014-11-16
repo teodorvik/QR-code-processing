@@ -31,12 +31,12 @@ for j = 1:column
 		if(decodeMask(i, j) ~= 0)
 			bitstring(k, l) = QR_data(i, j);
 			%bitstring(k, l) = testQR(i, j);
-      l=l+1;
-      if((l-1)/8==1)
-      	k=k+1;
-        l=1;
-      end
-		end
+            l=l+1;
+            if((l-1)/8==1)
+                k=k+1;
+                l=1;
+            end
+        end
 	end
 end
 
