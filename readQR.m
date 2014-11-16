@@ -14,33 +14,43 @@ function strout = readQR(QR_data)
 decodeMask = imread('images/decode_mask.png');
 
 % Position tracking
-[rows columns] = size(decodeMask);
-k = l = 0;
+[row column] = size(decodeMask);
+k = 1; l = 1;
 
 % Create matrix and allocate space to store binary strings
 bitstring = zeros(183, 8);
 
+% SMALL TEST
+% testQR = imread('images/perfect_test_qr.png');
+% test case can be performed by putting testQR as input
+% should give 'test QR' as output
 
-% --- Code not tested yet (have to update matlab) ---
-
-% TO-DO
-%% matlab reads binary black as 1 and white as 0, or? 
-%% should be the other way round to intrepret the ASCII correct.
-% Therefore; convert 1 to 0, and 0 to 1
-% Perform a small test case with images/perfect_test_qr.png
-%% which should give the message 'test QR'
-
-for j = 1:rows
-	for i = 1:columns
+for j = 1:column
+	for i = 1:row
 		% If it is a white space in the decode mask we read the save the bit information
-		if decodeMask(j, i) == 0
-			bitstring(k, l) = QR_data(j, i);
-			l++;
-			if l/8==1
-				k++;
-				l=0;
+		if(decodeMask(i, j) ~= 0)
+			bitstring(k, l) = QR_data(i, j);
+			%bitstring(k, l) = testQR(i, j);
+            l=l+1;
+            if((l-1)/8==1)
+                k=k+1;
+                l=1;
+            end
+        end
 	end
 end
 
+mess = cell(1,(k-1));
+
 % Convert to ASCII symbols/characters
-mess = char(bin2dec(reshape(bitstring,7,[]).').');
+for i = 1:(k-1)
+	mess{i} = char(bin2dec(num2str(bitstring(i,:))));
+end
+
+strout = strjoin(mess);
+
+% TO-DO
+% Only ASCII DEC 32-127 should be valid. Other values should not be added to mess{}.
+% It is only hardcoded so far and coded for a very specific case,
+% would be great to write so it works for for a more general case,
+% no static allocations etc.
