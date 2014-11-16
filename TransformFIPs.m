@@ -1,13 +1,6 @@
 % Rotate and translate the given FIPs to correct positions
 % Return a new set of transformed FIP:s and an new image
-% function [tformed_fips, tformed_image] = TransformFIPs(fips,image)
-clear all;
-% Input (test/impossible_qr.png)
-% fips = [124, 484; 295, 110; 333, 301];
-fips = [  66, 225; 106, 608;373, 172];
-image = imread('images/set1/Bygg_2e.png');
-% imtool(image);
-
+function [tformed_fips, tformed_image] = TransformFIPs(fips,image)
 distancesFips = zeros(4,4);
 topfip = [1:3];
 
@@ -60,9 +53,9 @@ fips = [fips ones(3,1)];
 tform = fips\perfect_qr
 last_column = [0.0; 0.0; 1.0];
 tform = [tform(:,1:2) last_column];
+
 %% Transform the image
 tformed_fips = fips*tform;
+tformed_fips = tformed_fips(:, 1:2);
 tformed_image = imwarp(image, affine2d(tform), 'OutputView', imref2d(size(image)));
-imshow(tformed_image);
-hold on;
-plot(tformed_fips(:, 1), tformed_fips(:, 2), 'r');
+
