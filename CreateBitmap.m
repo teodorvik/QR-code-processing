@@ -1,7 +1,7 @@
 % 
 % Input:
-% * Correctly translated and rotated image
-% * Points for the FIPs in the following format:
+% Translated and rotated image consisting of ones and zeros
+% Points for the FIPs in the following format:
 % points = [topLeftX topRightX bottomLeftX bottomRightX;
 %           topLeftY topRightY bottomLeftY bottomRightY];
 % 
