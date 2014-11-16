@@ -1,13 +1,17 @@
 % Rotate and translate the given FIP to correct positions
-% Return a new set of rotated and translated FIP:s
-% function [fip_rotated] = RotateFIP(fips)
+% Return a new set of rotated and translated FIP:s and an image
+% function [image_rotated, fip_rotated] = RotateFIP(fips)
 
-% Get the shortest distance from/to each big FIP
-% inorder to determine which one is which.
 clear all;
 % Input (bad_qr.png)
 % fips = [172, 58; 75, 230; 450, 58; 333, 212];
-fips = [56, 54; 332, 54; 56, 333];
+% Input (perfect_qr.png)
+% fips = [56, 54; 332, 54; 56, 333];
+% Input (set1/Bygg_3e.png)
+ fips = [70, 240; 369, 243;  66, 614];
+% Input (set1/Bygg_2c.png)
+% fips = [84,225; 133, 611; 471, 178];
+
 topfip = [1:3];
 
 % Calculate the distances
@@ -35,42 +39,18 @@ topfip(n) = 0;
 minlength = distancesFips(m,n);
 
 % Make perfect positioned points for mapping.
-topleft = fips(sum(topfip),:);
-topright = [topleft(1) + minlength, topleft(2)];
-bottomleft = [topleft(1), topleft(2)+ minlength];
-perfect_qr = [topleft; topright; bottomleft];
+% sum(topfip) returnes the index of the top right FIP
+perfect_top_left = fips(sum(topfip),:);
+perfect_top_right = [floor(perfect_top_left(1) + minlength), perfect_top_left(2)];
+perfect_bottom_left = [perfect_top_left(1), floor(perfect_top_left(2)+ minlength)];
+perfect_qr = [perfect_top_left; perfect_top_right; perfect_bottom_left];
 
 % Transformation matrix 
-trans_matrix = fips\perfect_qr;
+perfect_qr = [perfect_qr ones(3,1)];
+fips = [fips ones(3,1)];
+tform = fips\perfect_qr;
 
-% image = imread('images/test/perfect_qr.jpg');
-% imshow(image);
-% pause();
-% newImage = image*trans_matrix;
-% imshow(newImage)
-
-% Some plots
-% figure(1)
-% imshow('images/test/perfect_qr.jpg');
-% hold on;
-% plot(fips(:,1), fips(:,2), 'o');
-% plot(fips(m,:),fips(n,:), 'y');
-
-%%
-% Gammal BoB-labb.
-% cr500 är koordinater
-% CS1 = [cr500 cc512 ones(8,1)];
-% HS1 = [hr500 hc512 ones(8,1)];
-% x = CS1\HS1;
-% 
-% newImage = zeros(500,512);
-% 
-% % Coordinat vectors to all positions 
-% [X Y] = meshgrid(1:500, 1:512);
-% M = cat(2, X(:), Y(:));
-% M = [ M ones(500*512,1) ];
-% 
-% newCoords = M*x;
-% newCoords = floor(newCoords);
-%%
-
+image = imread('images/set1/Bygg_3e.png');
+imshow(image); pause()
+trans_image = imwarp(image,affine2d(tform));
+imshow(trans_image);
