@@ -18,8 +18,29 @@ edgeImage = Sobel(image, 0.95);
 
 %% Search for FIP
 
-fipPoints = FIPLineScan(edgeImage);
+fipPoints = FIPLineScan(edgeImage, 0.2);
 imshow(edgeImage);
 hold on;
 plot(fipPoints(:,2), fipPoints(:,1), 'x');
 
+opts = statset('Display','final');
+[idx,centerPoints] = kmeans(fipPoints,3,'Distance','cityblock',...
+    'Replicates',5,'Options',opts);
+
+figure;
+imshow(image);
+hold on;
+plot(fipPoints(idx==1,2),fipPoints(idx==1,1),'r.','MarkerSize',12)
+plot(fipPoints(idx==2,2),fipPoints(idx==2,1),'g.','MarkerSize',12)
+plot(fipPoints(idx==3,2),fipPoints(idx==3,1),'b.','MarkerSize',12)
+plot(centerPoints(:,2),centerPoints(:,1),'wx',...
+     'MarkerSize',15,'LineWidth',3)
+legend('Cluster 1','Cluster 2', 'Cluster3', 'Centroids',...
+       'Location','NW')
+title 'Cluster Assignments and Centroids'
+hold off
+
+
+
+% TO DO 
+% Remove outliers

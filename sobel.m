@@ -3,7 +3,7 @@
 % Sobel edge detection. Given a normalized image (with double values)
 % return an image where the edges are detected w.r.t. threshold value.
 function edgeImage = Sobel(originalImage, threshold) %#codegen
-assert(all(size(originalImage) <= [1024 1024]));
+%assert(all(size(originalImage) <= [1024 1024]));
 assert(isa(originalImage, 'double'));
 assert(isa(threshold, 'double'));
 

@@ -5,16 +5,24 @@
 % to the average distance. For example strictness = 0.2 means that the
 % distance can vary +- 0.2 times the average distance.
 function isFIP = CheckFIPPointsRatio(pointsArray, strictness)
-assert(all(size(pointsArray) == [1 6]));
+assert(all(size(pointsArray) == [6 2]));
 assert(isa(strictness, 'double'));
+
+if all(pointsArray(:,1) == pointsArray(1,1))
+    pointsArray = pointsArray(:,2);
+else
+    pointsArray = pointsArray(:,1);
+end
 
 distances = [pointsArray(2) - pointsArray(1),
              pointsArray(3) - pointsArray(2),
              pointsArray(4) - pointsArray(3),
              pointsArray(5) - pointsArray(4),
              pointsArray(6) - pointsArray(5)];
-         
-meanDistance = (pointsArray(6) - pointsArray(1))/7;
+
+distances = abs(distances);
+      
+meanDistance = abs(pointsArray(6) - pointsArray(1))/7;
 
 isFIP = true;
 for i = 1:5
