@@ -8,15 +8,17 @@ Calculate positions of the FIP:s.
 https://www.inf.u-szeged.hu/ipcg/publications/papers/KatonaNyulISMM2013.pdf
 http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5403098
 
-1. Gaussian smoothing
-2. Gradient calculation (sobel)
+1. ~~Gaussian smoothing~~
+2. ~~Gradient calculation (sobel)~~
 3. Binarization
+  * Must find a way to find better threshold value dependant of the image
 4. Line sweep, get FIP candidates
+  * Must remove outliers before calculating the final FIP-position
 
 ##### Output:
 FIP_positions = []
 
-### Mikael
+### Teodor
 Calculate rotation and translation at the given FIP:s.
 FIP_rotated = rotate(FIP_positions);
 
