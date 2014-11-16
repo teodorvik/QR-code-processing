@@ -55,7 +55,8 @@ last_column = [0.0; 0.0; 1.0];
 tform = [tform(:,1:2) last_column];
 
 %% Transform the image
-tformed_fips = fips*tform;
-tformed_fips = tformed_fips(:, 1:2);
+% The transformed fips will have the same values as perfect_qr. Just return
+% to columns we want from prefect_qr. 
+tformed_fips = perfect_qr(:, 1:2);
 tformed_image = imwarp(image, affine2d(tform), 'OutputView', imref2d(size(image)));
 
