@@ -3,8 +3,8 @@
 % Output: FIP_positions [4,2] 
 function centerPoints = GetFIPPositions(image)
 %% Apply Gaussian smoothing
-gaussian_filter = fspecial('gaussian',[3 3], 0.7);
-image = imfilter(image, gaussian_filter, 'replicate');
+%gaussian_filter = fspecial('gaussian',[3 3], 0.7);
+%image = imfilter(image, gaussian_filter, 'replicate');
 %# Display
 %imshow(Ig) 
 
@@ -17,9 +17,9 @@ edgeImage = Sobel(image, 0.5);
 %% Search for FIP
 
 fipPoints = FIPLineScan(edgeImage, 0.2);
-% imshow(edgeImage);
-% hold on;
-% plot(fipPoints(:,2), fipPoints(:,1), 'x');
+imshow(edgeImage);
+hold on;
+plot(fipPoints(:,2), fipPoints(:,1), 'x');
 
 opts = statset('Display','final');
 [idx,centerPoints] = kmeans(fipPoints,3,'Distance','cityblock',...

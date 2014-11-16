@@ -1,7 +1,7 @@
 % For when we want to test many images.
 % function[strout] = tnm034(image)
 
-image = im2double(imread('images/set1/Bygg_2b.png'));
+image = im2double(rgb2gray(imread('images/set5/Hus_4d.png')));
 
 % Calculate positions of the FIP:s.
 FIP_positions = GetFIPPositions(image);
@@ -9,6 +9,7 @@ FIP_positions = GetFIPPositions(image);
 % Transform the given FIP:s for easier computation later.
 [tformed_fips, tformed_image] = TransformFIPs(FIP_positions, image);
 
+figure
 imshow(tformed_image)
 
 % Convert to grayscale and compensate for uneven illumination.
