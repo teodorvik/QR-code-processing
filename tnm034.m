@@ -4,7 +4,7 @@
 image = im2double(imread('images/set1/Bygg_2b.png'));
 
 % Calculate positions of the FIP:s.
-FIP_positions = GetFIPPositions();
+FIP_positions = GetFIPPositions(image);
 
 % Transform the given FIP:s for easier computation later.
 [tformed_fips, tformed_image] = TransformFIPs(FIP_positions, image);

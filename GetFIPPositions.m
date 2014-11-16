@@ -1,10 +1,7 @@
 % Den här funktionen returnerar de 3 FIP:arna och 4 punkten på QR-koden.
 % Input: Image
 % Output: FIP_positions [4,2] 
-function centerPoints = GetFIPPositions()
-
-image = im2double(imread('images/set1/Bygg_1.png'));
-
+function centerPoints = GetFIPPositions(image)
 %% Apply Gaussian smoothing
 gaussian_filter = fspecial('gaussian',[3 3], 0.7);
 image = imfilter(image, gaussian_filter, 'replicate');
@@ -13,8 +10,9 @@ image = imfilter(image, gaussian_filter, 'replicate');
 
 %% Apply sobel filters in both directions
 
-edgeImage = Sobel(image, 0.95);
-%imshow(edgeImage)
+edgeImage = Sobel(image, 0.5);
+%subplot(1,2,1), imshow(image)
+%subplot(1,2,2), imshow(edgeImage)
 
 %% Search for FIP
 
@@ -34,7 +32,7 @@ centerPoints = [centerPoints(:,2) centerPoints(:,1)];
 % plot(fipPoints(idx==1,2),fipPoints(idx==1,1),'r.','MarkerSize',12)
 % plot(fipPoints(idx==2,2),fipPoints(idx==2,1),'g.','MarkerSize',12)
 % plot(fipPoints(idx==3,2),fipPoints(idx==3,1),'b.','MarkerSize',12)
-% plot(centerPoints(:,2),centerPoints(:,1),'wx',...
+% plot(centerPoints(:,1),centerPoints(:,2),'wx',...
 %      'MarkerSize',15,'LineWidth',3)
 % legend('Cluster 1','Cluster 2', 'Cluster3', 'Centroids',...
 %        'Location','NW')
