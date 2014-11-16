@@ -1,17 +1,15 @@
 % For when we want to test many images.
-% Right now it is only hardcoding of the image.
-%
 % function[strout] = tnm034(image)
 
 image = im2double(imread('images/set1/Bygg_1.png'));
 
-% Teodor
+% Mikael
 % Calculate positions of the FIP:s.
 % FIP_positions = GetFIPPositions();
 
-% Mikael
+% Teodor
 % Calculate rotation and translation at the given FIP:s.
-% FIP_rotated = rotate(FIP_positions);
+% [tformed_fips, tformed_image] = TransformFIPs(FIP_positions, image);
 
 % Oscar
 % Convert to grayscale.
