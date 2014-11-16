@@ -3,7 +3,7 @@
 % Output: FIP_positions [4,2] 
 % function FIP_positions = GetFIPPositions()
 
-image = im2double(imread('images/set1/Bygg_1.png'));
+image = im2double(imread('images/set1/Bygg_4d.png'));
 
 %% Apply Gaussian smoothing
 gaussian_filter = fspecial('gaussian',[3 3], 0.7);
@@ -13,12 +13,13 @@ image = imfilter(image, gaussian_filter, 'replicate');
 
 %% Apply sobel filters in both directions
 
-edgeImage = Sobel(image, 0.95);
-%imshow(edgeImage)
+edgeImage = Sobel(image, 0.5);
+subplot(1,2,1), imshow(image)
+subplot(1,2,2), imshow(edgeImage)
 
 %% Search for FIP
 
-fipPoints = FIPLineScan(edgeImage, 0.2);
+fipPoints = FIPLineScan(edgeImage, 0.15);
 imshow(edgeImage);
 hold on;
 plot(fipPoints(:,2), fipPoints(:,1), 'x');
