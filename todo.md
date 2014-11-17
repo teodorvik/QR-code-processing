@@ -12,8 +12,9 @@ http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5403098
 2. ~~Gradient calculation (sobel)~~
 3. Binarization
   * Must find a way to find better threshold value dependant of the image
-4. Line sweep, get FIP candidates
+4. Line sweep, get FIP (finder pattern) candidates
   * Must remove outliers before calculating the final FIP-position
+5. Line sweep, get AP (alignment pattern)
 
 ##### Output:
 FIP_positions = []
