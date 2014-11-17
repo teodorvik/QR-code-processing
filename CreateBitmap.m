@@ -10,7 +10,7 @@
 % Points for testImage5.png
 % points5 = [66 195; 406 195; 66 536];
 
-function[bitmap] = CreateBitmap(image, stepSize)
+function[bitmap] = CreateBitmap(stepSize, image)
 
 % -----------------------------
 % Loop through the entire QR image
@@ -19,13 +19,23 @@ function[bitmap] = CreateBitmap(image, stepSize)
 % Preallocate for speed
 bitmap = zeros(41,41);
 
+[yMax, xMax] = size(image);
+
 for i = 1:41
     posX = stepSize * (i - 1) + 1;
     posXNext = posX + stepSize;
     
+    if (posXNext > xMax)
+        posXNext = xMax;
+    end
+    
     for j = 1:41
         posY = stepSize * (j - 1) + 1;
         posYNext = posY + stepSize;
+        
+        if (posYNext > yMax)
+            posYNext = yMax;
+        end
     
         % Summarize a pixel area in the image
         tempImage = image(posY:posYNext, posX:posXNext); 
@@ -38,5 +48,3 @@ for i = 1:41
         end
     end
 end
-
-imshow(bitmap)

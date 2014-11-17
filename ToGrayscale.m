@@ -12,7 +12,7 @@
 % And the new image's stepSize
 %
 
-function[grayImage, stepSize] = ToGrayscale(image, points)
+function[stepSize, grayImage] = ToGrayscale(points, image)
 
 % -----------------------------
 % Initialize variables
@@ -67,5 +67,3 @@ for x = 1:imageSize(2)
         end
     end
 end
-
-imshow(grayImage);

@@ -18,9 +18,9 @@ edgeImage = Sobel(image, 0.5);
 %% Search for FIP
 
 fipPoints = FIPLineScan(edgeImage, 0.2);
-imshow(edgeImage);
-hold on;
-plot(fipPoints(:,2), fipPoints(:,1), 'x');
+% imshow(edgeImage);
+% hold on;
+% plot(fipPoints(:,2), fipPoints(:,1), 'x');
 
 opts = statset('Display','final');
 [idx,centerPoints] = kmeans(fipPoints,3,'Distance','cityblock',...
