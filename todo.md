@@ -16,7 +16,7 @@ http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5403098
   * Must remove outliers before calculating the final FIP-position
 
 ##### Output:
-FIP_positions = []
+FIPPositions = []
 
 ### Teodor
 ~~Calculate rotation and translation at the given FIP:s.
@@ -28,13 +28,13 @@ Compensate for uneven illumination.
 
 ### Oscar
 Create a 41*41 matrix of all points after rotation and translation.
-QR_data = CreateBitmap(FIP_rotated);
+QR_data = CreateBitmap(FIPRotated);
 
 ### Anton
 Determine text from perfect points by reading QR_data pixel by pixel.
 Convert to ASCII symbols.
 Put strout as the resulting text.
-strout = readQR(QR_data);
+strout = readQR(QRData);
 
 ### Known errors
 'images/set5/Hus_4e.png' doesn't transform correctly. Needs a fourth FIP inorder to work.
