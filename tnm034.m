@@ -1,7 +1,13 @@
 % For when we want to test many images.
 % function[strout] = tnm034(image)
 
-image = im2double(rgb2gray(imread('images/set5/Hus_4d.png')));
+image = im2double(imread('images/set5/Hus_4e.png'));
+
+% Make sure the image is in grayscale
+[X, Y, dim] = size(image);
+if(dim == 3) 
+    image = rgb2gray(image);
+end
 
 % Calculate positions of the FIP:s.
 FIP_positions = GetFIPPositions(image);

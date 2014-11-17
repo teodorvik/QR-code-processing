@@ -50,7 +50,7 @@ perfect_qr = [perfect_top_left; perfect_top_right; perfect_bottom_left];
 %% Create the transformation matrix 
 perfect_qr = [perfect_qr ones(3,1)];
 fips = [fips ones(3,1)];
-tform = fips\perfect_qr
+tform = fips\perfect_qr;
 last_column = [0.0; 0.0; 1.0];
 tform = [tform(:,1:2) last_column];
 
