@@ -1,4 +1,4 @@
-function strout = readQR(QR_data)
+function strout = ReadQR(QR_data)
 % Input: bitmap (QR code)
 % Output: decoded message
 %
