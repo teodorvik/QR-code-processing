@@ -1,11 +1,11 @@
 % For when we want to test many images.
-% function[strout] = tnm034(image)
+function[strout] = tnm034(image)
 
-image = im2double(imread('images/set1/Bygg_4e.png'));
-% image = im2double(imread('images/set5/Hus_4e.png'));
+image = im2double(imread(image));
 
 % Make sure the image is in grayscale
 [X, Y, dim] = size(image);
+
 if(dim == 3) 
     image = rgb2gray(image);
 end
@@ -25,5 +25,5 @@ QRData = CreateBitmap(stepSize, grayImage);
 % Determine text from perfect points by reading QR_data pixel by pixel.
 % Convert to ASCII symbols.
 % Put strout as the resulting text.
-imshow(QRData);
+% imshow(QRData);
 strout = ReadQR(QRData);
