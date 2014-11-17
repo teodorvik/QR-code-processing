@@ -3,7 +3,8 @@
 % Output: FIP_positions [4,2] 
 function centerPoints = GetFIPPositions(image)
 %% Apply Gaussian smoothing
-%gaussian_filter = fspecial('gaussian',[3 3], 0.7);
+%gsize = floor(size(image)*0.05)
+%gaussian_filter = fspecial('gaussian',gsize, 0.7);
 %image = imfilter(image, gaussian_filter, 'replicate');
 %# Display
 %imshow(Ig) 
