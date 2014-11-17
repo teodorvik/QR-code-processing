@@ -11,22 +11,23 @@ http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5403098
 
 1. ~~Gaussian smoothing~~
 2. ~~Gradient calculation (sobel)~~
-3. Binarization
-  * Must find a way to find better threshold value dependant of the image
-4. Line sweep, get FIP candidates
-  * Must remove outliers before calculating the final FIP-position
+3. ~~Binarization~~
+4. ~~Line sweep, get FIP candidates~~
+
+### Mikael
+Find corners of QR
 
 ### Teodor
-~~Calculate rotation and translation at the given FIP:s.
-FIP_rotated = TransformFIPs(FIP_positions);~~
+~~Calculate rotation and translation at the given FIP:s.~~
+Change the function to use the four corners instead.
 
 ### Oscar
 Convert to grayscale.
 Compensate for uneven illumination.
+Move the cropping from ToGrayscale to the TransformFIPS function instead? Makes more sense.
 
 ### Oscar
 Create a 41*41 matrix of all points after rotation and translation.
-QR_data = CreateBitmap(FIPRotated);
 
 ### Anton
 Determine text from perfect points by reading QR_data pixel by pixel.
