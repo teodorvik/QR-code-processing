@@ -55,6 +55,22 @@ background = (two*three)'*one;
 % be in this position then we are dealing with a white QR-pixel
 grayImage = (image > background*1.2);
 
-% TODO: make this dynamic
-% Remove white border
-%grayImage = grayImage(3:imageSize(1), 3:imageSize(2));
+% Removes white borders in both x and y
+% TODO: Make this better
+for y = 1:imageSize(1)
+    if sum(grayImage(y,:)) > imageSize(1) * 0.9
+        grayImage = grayImage(2:imageSize(1),:);
+        imageSize(1) = imageSize(1) - 1;
+    else
+        break;
+    end
+end
+
+for x = 1:imageSize(2)
+    if sum(grayImage(:,x)) > imageSize(2) * 0.9
+        grayImage = grayImage(:,2:imageSize(2));
+        imageSize(2) = imageSize(2) - 1;
+    else
+        break;
+    end
+end
