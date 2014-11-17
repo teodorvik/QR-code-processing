@@ -30,6 +30,8 @@ endY = points(3,2) + stepSize * 3 + stepSize / 2;
 
 % Crop away unnecessary parts of the image
 image = image(startY:endY, startX:endX);
+% image = imerode(image,[1, 1; 1, 1]);
+% image = imdilate(image,[1, 1; 1, 1]);
 
 imageSize = size(image); % imageSize(1) = length in y
 
@@ -47,23 +49,14 @@ grayImage = zeros(imageSize);
 % Loop through the image and determine color
 % -----------------------------
 
-for x = 1:imageSize(2)
-    for y = 1:imageSize(1)
-        
-        % Perform billinear interpolation
-        one = [1 - x/imageSize(2), x/imageSize(2)];
-        two = [topLeftBlack, bottomLeftBlack; topRightBlack, bottomRightBlack];
-        three = [1-y/imageSize(1); y/imageSize(1)];
-        
-        % Background matrix for debugging
-        background(y,x) = one*two*three;
-        
-        % If the image's value is higher than what a black QR-pixel *should*
-        % be in this position then we are dealing with a white QR-pixel
-        if image(y,x) > background(y,x)*1.1
-            grayImage(y,x) = 1;
-        else
-            grayImage(y,x) = 0;
-        end
-    end
-end
+% Perform billinear interpolation
+one = [1 - (1:imageSize(2))/imageSize(2); (1:imageSize(2))/imageSize(2)];
+two = [topLeftBlack, bottomLeftBlack; topRightBlack, bottomRightBlack];
+three = [1-(1:imageSize(1))/imageSize(1); (1:imageSize(1))/imageSize(1)];
+
+% Background matrix for debugging
+background = (two*three)'*one;    
+
+% If the image's value is higher than what a black QR-pixel *should*
+% be in this position then we are dealing with a white QR-pixel
+grayImage = (image > background*1.2);

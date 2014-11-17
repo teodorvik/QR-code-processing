@@ -16,8 +16,6 @@ FIP_positions = GetFIPPositions(image);
 % Transform the given FIP:s for easier computation later.
 [tformed_fips, tformed_image] = TransformFIPs(FIP_positions, image);
 
-%figure; imshow(tformed_image)
-% tformed_fips
 % Convert to grayscale and compensate for uneven illumination.
 [step_size, gray_image] = ToGrayscale(tformed_fips, tformed_image);
 
@@ -27,5 +25,5 @@ QR_data = CreateBitmap(step_size, gray_image);
 % Determine text from perfect points by reading QR_data pixel by pixel.
 % Convert to ASCII symbols.
 % Put strout as the resulting text.
-imshow(QR_data);
+figure; imshow(QR_data);
 strout = ReadQR(QR_data)
