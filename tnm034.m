@@ -11,21 +11,21 @@ if(dim == 3)
 end
 
 % Calculate positions of the FIP:s.
-FIP_positions = GetFIPPositions(image);
+FIPPositions = GetFIPPositions(image);
 
 % Transform the given FIP:s for easier computation later.
-[tformed_fips, tformed_image] = TransformFIPs(FIP_positions, image);
+[tformedFips, tformedImage] = TransformFIPs(FIPPositions, image);
 
 %figure; imshow(tformed_image)
 % tformed_fips
 % Convert to grayscale and compensate for uneven illumination.
-[step_size, gray_image] = ToGrayscale(tformed_fips, tformed_image);
+[stepSize, grayImage] = ToGrayscale(tformedFips, tformedImage);
 
 % Create a 41*41 matrix of all points after rotation and translation.
-QR_data = CreateBitmap(step_size, gray_image);
+QRData = CreateBitmap(stepSize, grayImage);
 
 % Determine text from perfect points by reading QR_data pixel by pixel.
 % Convert to ASCII symbols.
 % Put strout as the resulting text.
-imshow(QR_data);
-strout = ReadQR(QR_data)
+imshow(QRData);
+strout = ReadQR(QRData)
