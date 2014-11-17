@@ -1,5 +1,6 @@
 TO DO
 =====
+Write all tests to file.
 
 ### Mikael
 Calculate positions of the FIP:s.
@@ -14,9 +15,6 @@ http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5403098
   * Must find a way to find better threshold value dependant of the image
 4. Line sweep, get FIP candidates
   * Must remove outliers before calculating the final FIP-position
-
-##### Output:
-FIPPositions = []
 
 ### Teodor
 ~~Calculate rotation and translation at the given FIP:s.

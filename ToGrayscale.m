@@ -17,8 +17,7 @@ function[grayImage] = ToGrayscale(points, image)
 % -----------------------------
 
 % stepSize is the size of one QR-pixel in the image
-stepSize = (points(2,1) - points(1,1)) / 34;
-stepSize = round(stepSize);
+stepSize = round((points(2,1) - points(1,1)) / 34);
 
 % Used to crop the image
 startX = points(1,1) - stepSize * 3 - stepSize / 2;
