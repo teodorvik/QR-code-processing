@@ -10,7 +10,7 @@
 % Points for testImage5.png
 % points5 = [66 195; 406 195; 66 536];
 
-function[bitmap] = CreateBitmap(stepSize, image)
+function[bitmap] = CreateBitmap(image)
 
 % -----------------------------
 % Loop through the entire QR image
@@ -18,20 +18,24 @@ function[bitmap] = CreateBitmap(stepSize, image)
 
 % Preallocate for speed
 bitmap = zeros(41,41);
-
 [yMax, xMax] = size(image);
 
+% Used for debugging
+%hold on;
+
+stepSize = yMax / 41;
+
 for i = 1:41
-    posX = stepSize * (i - 1) + 1;
-    posXNext = posX + stepSize;
+    posX = round(stepSize * (i - 1)) + 1;
+    posXNext = round(posX + stepSize);
     
     if (posXNext > xMax)
         posXNext = xMax;
     end
     
     for j = 1:41
-        posY = stepSize * (j - 1) + 1;
-        posYNext = posY + stepSize;
+        posY = round(stepSize * (j - 1)) + 1;
+        posYNext = round(posY + stepSize);
         
         if (posYNext > yMax)
             posYNext = yMax;
@@ -41,7 +45,12 @@ for i = 1:41
         tempImage = image(posY:posYNext, posX:posXNext); 
         meanValue = mean(mean(tempImage));
         
-        if (meanValue >= 0.5)
+        % Used for debugging
+        %plot(posX, posY, '-r+');
+        %plot(posXNext, posYNext, '-r+');
+        
+        % TODO: Find a good way to determine threshold value
+        if (meanValue >= 0.6)
             bitmap(j,i) = 1;
         else
             bitmap(j,i) = 0;

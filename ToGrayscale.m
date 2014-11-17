@@ -1,4 +1,3 @@
-% TODO: remove loop to increase speed?
 %
 % Input:
 % Translated and rotated image
@@ -9,10 +8,9 @@
 %
 % Output:
 % This function will return an image consisting of ones and zeros
-% And the new image's stepSize
 %
 
-function[stepSize, grayImage] = ToGrayscale(points, image)
+function[grayImage] = ToGrayscale(points, image)
 
 % -----------------------------
 % Initialize variables
@@ -41,12 +39,8 @@ topRightBlack = image(round(stepSize * 0.5), imageSize(2) - round(stepSize * 0.5
 bottomLeftBlack = image(imageSize(1) - round(stepSize * 0.5),  round(stepSize * 0.5));
 bottomRightBlack = image(imageSize(1) - round(stepSize * 5.5), imageSize(2) - round(stepSize * 5.5));
 
-% Initialize images for speed
-background = zeros(imageSize);
-grayImage = zeros(imageSize);
-
 % -----------------------------
-% Loop through the image and determine color
+% Perform operations on the entire image
 % -----------------------------
 
 % Perform billinear interpolation
@@ -60,3 +54,7 @@ background = (two*three)'*one;
 % If the image's value is higher than what a black QR-pixel *should*
 % be in this position then we are dealing with a white QR-pixel
 grayImage = (image > background*1.2);
+
+% TODO: make this dynamic
+% Remove white border
+%grayImage = grayImage(3:imageSize(1), 3:imageSize(2));
