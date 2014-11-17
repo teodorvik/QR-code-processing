@@ -9,26 +9,26 @@ function centerPoints = GetFIPPositions(image)
 %# Display
 %imshow(Ig) 
 
-%% Apply sobel filters in both directions
+%% Apply sobel filter
 
 edgeImage = Sobel(mat2gray(image), 0.5);
 %subplot(1,2,1), imshow(image)
 %subplot(1,2,2), imshow(edgeImage)
 
-%% Search for FIP
+%% Search for FIP candidates
 
 fipPoints = FIPLineScan(edgeImage, 0.2);
 % imshow(edgeImage);
 % hold on;
 % plot(fipPoints(:,2), fipPoints(:,1), 'x');
 
-% Find three clusters of points
+%% Find three clusters of points
 % Is three replicates enough?
-% opts = statset('Display','final');
 [idx,centerPoints] = kmeans(fipPoints,3,'Distance','cityblock',...
     'Replicates',3);
 
 centerPoints = [centerPoints(:,2) centerPoints(:,1)];
+
 % figure;
 % imshow(image);
 % hold on;
@@ -42,7 +42,3 @@ centerPoints = [centerPoints(:,2) centerPoints(:,1)];
 % title 'Cluster Assignments and Centroids'
 % hold off
 
-
-
-% TO DO 
-% Remove outliers
