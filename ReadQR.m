@@ -42,11 +42,12 @@ end
 
 s = 1;
 % Convert to ASCII symbols/characters
+mess = {};
 for i = 1:(k-1)
-		if (bin2dec(num2str(bitstring(i,:))) > 31 && bin2dec(num2str(bitstring(i,:))) < 128)
+		%if (bin2dec(num2str(bitstring(i,:))) > 31 && bin2dec(num2str(bitstring(i,:))) < 128)
 			mess{s} = char(bin2dec(num2str(bitstring(i,:))));
 			s=s+1;
-		end
+		%end
 end
 
 strout = strjoin(mess);

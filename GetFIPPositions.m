@@ -18,9 +18,7 @@ edgeImage = Sobel(mat2gray(image), 0.5);
 %% Search for FIP candidates
 
 fipPoints = FIPLineScan(edgeImage, 0.2);
-% imshow(edgeImage);
-% hold on;
-% plot(fipPoints(:,2), fipPoints(:,1), 'x');
+% imshow(edgeImage); hold on; plot(fipPoints(:,2), fipPoints(:,1), 'x');
 
 %% Find three clusters of points
 % Is three replicates enough?
