@@ -23,6 +23,7 @@ Change the function to use the four corners instead.
 
 ### Oscar
 Convert to grayscale.
+Look at the lecture slides. Base illumination on maxvalue.
 Compensate for uneven illumination.
 Move the cropping from ToGrayscale to the TransformFIPS function instead? Makes more sense.
 

@@ -1,9 +1,6 @@
 % For when we want to test many images.
 function[strout] = tnm034(image)
 
-% Convert image to double
-image = im2double(imread(image));
-
 % Make sure the image is in grayscale
 [X, Y, dim] = size(image);
 if(dim == 3) 
@@ -18,7 +15,7 @@ QRCorners = GetQRCorners(image, FIPPositions);
 
 % Transform the given FIP:s for easier computation later.
 [tformedFips, tformedImage] = TransformFIPs(FIPPositions, image);
-figure; imshow(tformedImage)
+%figure; imshow(tformedImage)
 
 % Convert to grayscale and compensate for uneven illumination.
 grayImage = ToGrayscale(tformedFips, tformedImage);
@@ -31,6 +28,5 @@ QRData = CreateBitmap(grayImage);
 % Put strout as the resulting text.
 figure;
 imshow(QRData);
-strout = ReadQR(QRData)
 strout = ReadQR(QRData);
 
