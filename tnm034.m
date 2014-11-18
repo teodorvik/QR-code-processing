@@ -12,6 +12,10 @@ FIPPositions = GetFIPPositions(image);
 
 % Get the four corners of QR-pattern. Not done
 QRCorners = GetQRCorners(image, FIPPositions);
+imshow(image);
+hold on;
+plot(QRCorners(1,:), QRCorners(2,:),  'rs', 'MarkerSize', 10, 'LineWidth', 3);
+
 
 % Transform the given FIP:s for easier computation later.
 [tformedFips, tformedImage] = TransformFIPs(FIPPositions, image);

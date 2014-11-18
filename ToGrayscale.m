@@ -11,7 +11,7 @@
 %
 
 function[grayImage] = ToGrayscale(points, image)
-
+image = double(image);
 % -----------------------------
 % Initialize variables
 % -----------------------------

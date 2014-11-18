@@ -1,30 +1,30 @@
 % Rotate and translate the given FIPs to correct positions
 % Return a new set of transformed FIP:s and an new image
 function [tformed_fips, tformed_image] = TransformFIPs(fips,image)
-distancesFips = zeros(4,4);
-topfip = [1:3];
-
-%% Calculate the distances
-for i = 1:length(fips)
-    for j = 1:length(fips)
-        distancesFips(i,j) = sqrt((fips(i,1)-fips(j,1))^2 + (fips(i,2)-fips(j,2))^2);
-    end
-end
-
-% If zero set it to nan
-distancesFips(distancesFips <= 0) = nan;
+%% Calculate the distances between pair of points
+% pdist(1) = distance between 2 and 1
+% pdist(2) = distance between 3 and 1
+% pdist(3) = distance between 3 and 2
+distancesFips = pdist(fips);
 
 %% Since we know which FIPs that got the most distance between them we also
 % know that the remaining FIP is the top left FIP.
-[maxA,ind] = max(distancesFips(:));
-[m,n] = ind2sub(size(distancesFips),ind);
-topfip(m) = 0;
-topfip(n) = 0;
+[maxA ind] = max(distancesFips);
+if ind == 1
+    topfip = 3;
+elseif ind == 2
+    topfip = 2;
+elseif ind == 3
+    topfip = 1;
+end
+
+fipIndices = [1 2 3];
+unknownFips = fipIndices(fipIndices~=topfip);
 
 %% Set the FIPs in the correct order so we can translate them later
-top_fip = fips(sum(topfip),:);
-unknown_fip1 = fips(m,:);
-unknown_fip2 = fips(n,:);
+top_fip = fips(topfip,:);
+unknown_fip1 = fips(unknownFips(1),:);
+unknown_fip2 = fips(unknownFips(2),:);
 
 if (GetAngle(unknown_fip1-top_fip) < GetAngle(unknown_fip2-top_fip))
     fips(1,:) = top_fip;
@@ -59,4 +59,5 @@ tform = [tform(:,1:2) last_column];
 % to columns we want from prefect_qr. 
 tformed_fips = floor(perfect_qr(:, 1:2));
 tformed_image = imwarp(image, affine2d(tform), 'OutputView', imref2d(size(image)));
+whos tformed_image
 

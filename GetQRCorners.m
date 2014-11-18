@@ -96,7 +96,7 @@ for fipIndex = 1:3
     yTranslate = centerPoints(fipIndex,2) - double(r);
 
     % Add the four corner points found to the array
-    cornerPoints(:,1+(fipIndex-1)*4:fipIndex*4) = [xCorners; yCorners];
+    cornerPoints(:,1+(fipIndex-1)*4:fipIndex*4) = [xCorners + xTranslate; yCorners + yTranslate];
 end
 
 % TO DO
