@@ -42,6 +42,10 @@ bottomRightBlack = image(imageSize(1) - round(stepSize * 5.5), imageSize(2) - ro
 % Perform operations on the entire image
 % -----------------------------
 
+% TODO: Divide the image into smaller parts and perform billinear 
+% interpolation on these smaller areas, thus also accounting for e.g 
+% specular highlights in the middle of the image 
+
 % Perform billinear interpolation
 one = [1 - (1:imageSize(2))/imageSize(2); (1:imageSize(2))/imageSize(2)];
 two = [topLeftBlack, bottomLeftBlack; topRightBlack, bottomRightBlack];
