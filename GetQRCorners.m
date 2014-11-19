@@ -1,6 +1,6 @@
 function cornerPoints = GetQRCorners(image, centerPoints)
 
-cornerPoints = zeros(2,16);
+cornerPoints = zeros(4,2);
 
 % find a good value for the radius in which the entire fip should be
 % located
@@ -19,6 +19,8 @@ r = int16(d*5/34);
 % corners = corner(image((centerPoints(3,2)-r):(centerPoints(3,2)+r),(centerPoints(3,1)-r):(centerPoints(3,1)+r)), 'Harris', 50, 'SensitivityFactor', sensitivity);
 % subplot(1,3,3); imshow(image((centerPoints(3,2)-r):(centerPoints(3,2)+r),(centerPoints(3,1)-r):(centerPoints(3,1)+r)));
 % hold on; plot(corners(:,1),corners(:,2),'bx');
+
+allCorners = zeros(2,12);
 for fipIndex = 1:3
     % Create a binary image with the FIP as a filled square
     I = image((centerPoints(fipIndex,2)-r):(centerPoints(fipIndex,2)+r),...
@@ -29,8 +31,8 @@ for fipIndex = 1:3
     Ifinal = bwlabel(Iarea);
 
     % Find corners of the square by finding out how far the centroid is
-    % from points in each quadrant. Doesnt work for squares that are
-    % rotated a lot.
+    % from points in each quadrant.
+    % Doesnt work for squares that are rotated a lot.
     
     % First get all the points.
     [rows columns] = find(Ifinal);
@@ -96,10 +98,19 @@ for fipIndex = 1:3
     yTranslate = centerPoints(fipIndex,2) - double(r);
 
     % Add the four corner points found to the array
-    cornerPoints(:,1+(fipIndex-1)*4:fipIndex*4) = [xCorners + xTranslate; yCorners + yTranslate];
+    allCorners(:,1+(fipIndex-1)*4:fipIndex*4) = [xCorners + xTranslate; yCorners + yTranslate];
 end
+
+% Create centroid in the middle of all fips.
+centroid = sum(centerPoints)/3;
+
+% Use centroid to find the outmost corners of the fips. (Four corner points
+% are stored in allPoints for each FIP).
+cornerDistFromCentroid = sqrt((allCorners(1,:) - centroid(1)).^2+(allCorners(2,:) - centroid(2)).^2)
+cornerPoints(1,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(1:4))));
+cornerPoints(2,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(5:8))));
+cornerPoints(3,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(9:12))));
 
 % TO DO
 % Find the fourth corner of the QR-pattern
-% Return the four corners of the QR-pattern instead of all FIP corners?
 

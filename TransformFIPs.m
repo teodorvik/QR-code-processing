@@ -2,10 +2,10 @@
 % Return a new set of transformed FIP:s and an new image
 function [tformed_fips, tformed_image] = TransformFIPs(fips,image)
 %% Calculate the distances between pair of points
-% pdist(1) = distance between 2 and 1
-% pdist(2) = distance between 3 and 1
-% pdist(3) = distance between 3 and 2
 distancesFips = pdist(fips);
+% distancesFips(1) = distance between 2 and 1
+% distancesFips(2) = distance between 3 and 1
+% distancesFips(3) = distance between 3 and 2
 
 %% Since we know which FIPs that got the most distance between them we also
 % know that the remaining FIP is the top left FIP.
