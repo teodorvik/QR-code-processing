@@ -11,7 +11,6 @@
 %
 
 function[grayImage] = ToGrayscale(points, image)
-image = double(image);
 % -----------------------------
 % Initialize variables
 % -----------------------------
@@ -49,20 +48,20 @@ grayImage = (image > background*1.2);
 
 % Removes white borders in both x and y
 % TODO: Make this better
-for y = 1:imageSize(1)
-    if sum(grayImage(y,:)) > imageSize(1) * 0.9
-        grayImage = grayImage(2:imageSize(1),:);
-        imageSize(1) = imageSize(1) - 1;
-    else
-        break;
-    end
-end
-
-for x = 1:imageSize(2)
-    if sum(grayImage(:,x)) > imageSize(2) * 0.9
-        grayImage = grayImage(:,2:imageSize(2));
-        imageSize(2) = imageSize(2) - 1;
-    else
-        break;
-    end
-end
+% for y = 1:imageSize(1)
+%     if sum(grayImage(y,:)) > imageSize(1) * 0.9
+%         grayImage = grayImage(2:imageSize(1),:);
+%         imageSize(1) = imageSize(1) - 1;
+%     else
+%         break;
+%     end
+% end
+% 
+% for x = 1:imageSize(2)
+%     if sum(grayImage(:,x)) > imageSize(2) * 0.9
+%         grayImage = grayImage(:,2:imageSize(2));
+%         imageSize(2) = imageSize(2) - 1;
+%     else
+%         break;
+%     end
+% end
