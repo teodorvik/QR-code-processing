@@ -17,18 +17,7 @@ image = double(image);
 % -----------------------------
 
 % stepSize is the size of one QR-pixel in the image
-stepSize = round((points(2,1) - points(1,1)) / 34);
-
-% Used to crop the image
-startX = points(1,1) - stepSize * 3 - stepSize / 2;
-startY = points(1,2) - stepSize * 3 - stepSize / 2;
-endX = points(2,1) + stepSize * 3 + stepSize / 2;
-endY = points(3,2) + stepSize * 3 + stepSize / 2;
-
-% Crop away unnecessary parts of the image
-image = image(startY:endY, startX:endX);
-% image = imerode(image,[1, 1; 1, 1]);
-% image = imdilate(image,[1, 1; 1, 1]);
+stepSize = round((points(2,1) - points(1,1)) / 41);
 
 imageSize = size(image); % imageSize(1) = length in y
 

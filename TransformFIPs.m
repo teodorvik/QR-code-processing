@@ -1,6 +1,6 @@
 % Rotate and translate the given FIPs to correct positions
-% Return a new set of transformed FIP:s and an new image
-function [tformed_fips, tformed_image] = TransformFIPs(fips,image)
+% Return a new set of FIP:s and an image that have been transformed and cropped.
+function [croppedFips, croppedImage] = TransformFIPs(fips,image)
 %% Calculate the distances between pair of points
 distancesFips = pdist(fips);
 % distancesFips(1) = distance between 2 and 1
@@ -54,10 +54,11 @@ tform = fips\perfect_qr;
 last_column = [0.0; 0.0; 1.0];
 tform = [tform(:,1:2) last_column];
 
-%% Transform the image
+%% Transform and crop the image
 % The transformed fips will have the same values as perfect_qr. Just return
 % to columns we want from prefect_qr. 
-tformed_fips = floor(perfect_qr(:, 1:2));
-tformed_image = imwarp(image, affine2d(tform), 'OutputView', imref2d(size(image)));
-whos tformed_image
+tformedImage = imwarp(image, affine2d(tform), 'OutputView', imref2d(size(image)));
+tformedFips = floor(perfect_qr(:, 1:2));
+
+[croppedFips, croppedImage] = CropImage(tformedFips, tformedImage);
 

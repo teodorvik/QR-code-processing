@@ -25,7 +25,7 @@ QRCorners = GetQRCorners(image, FIPPositions);
 
 %% Transform the given FIP:s for easier computation later.
 [tformedFips, tformedImage] = TransformFIPs(FIPPositions, image);
-%figure; imshow(tformedImage)
+figure; imshow(tformedImage)
 
 % Convert to grayscale and compensate for uneven illumination.
 grayImage = ToGrayscale(tformedFips, tformedImage);
