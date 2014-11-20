@@ -5,18 +5,6 @@ function cornerPoints = GetQRCorners(image, centerPoints)
 d = sort(pdist(centerPoints));
 d = d(2);
 r = int16(d*5/34);
-% sensitivity = 0.001;
-% corners = corner(image((centerPoints(1,2)-r):(centerPoints(1,2)+r),(centerPoints(1,1)-r):(centerPoints(1,1)+r)), 'Harris', 50, 'SensitivityFactor', sensitivity);
-% subplot(1,3,1); imshow(image((centerPoints(1,2)-r):(centerPoints(1,2)+r),(centerPoints(1,1)-r):(centerPoints(1,1)+r)));
-% hold on; plot(corners(:,1),corners(:,2),'bx');
-% 
-% corners = corner(image((centerPoints(2,2)-r):(centerPoints(2,2)+r),(centerPoints(2,1)-r):(centerPoints(2,1)+r)), 'Harris', 50, 'SensitivityFactor', sensitivity);
-% subplot(1,3,2); imshow(image((centerPoints(2,2)-r):(centerPoints(2,2)+r),(centerPoints(2,1)-r):(centerPoints(2,1)+r)));
-% hold on; plot(corners(:,1),corners(:,2),'bx');
-% 
-% corners = corner(image((centerPoints(3,2)-r):(centerPoints(3,2)+r),(centerPoints(3,1)-r):(centerPoints(3,1)+r)), 'Harris', 50, 'SensitivityFactor', sensitivity);
-% subplot(1,3,3); imshow(image((centerPoints(3,2)-r):(centerPoints(3,2)+r),(centerPoints(3,1)-r):(centerPoints(3,1)+r)));
-% hold on; plot(corners(:,1),corners(:,2),'bx');
 
 allCorners = zeros(2,12);
 for fipIndex = 1:3
@@ -109,19 +97,16 @@ cornerPoints(1,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFrom
 cornerPoints(2,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(5:8))));
 cornerPoints(3,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(9:12))));
 
-% TO DO
-% Find the fourth corner of the QR-pattern
-
 %% Calculate the distances between pair of points
-distancesFips = pdist(cornerPoints(1:3,:));
-% distancesFips(1) = distance between 2 and 1
-% distancesFips(2) = distance between 3 and 1
-% distancesFips(3) = distance between 3 and 2
+distancesCorners = pdist(cornerPoints(1:3,:));
+% distancesCorners(1) = distance between 2 and 1
+% distancesCorners(2) = distance between 3 and 1
+% distancesCorners(3) = distance between 3 and 2
 
-%% Since we know which FIPs that got the most distance between them we also
-% know that the remaining FIP is the top left FIP.
-distancesFips
-[maxVal ind] = max(distancesFips)
+%% Since we know which corner that got the most distance between them we also
+% know that the remaining corner is the top left corner.
+distancesCorners
+[maxVal ind] = max(distancesCorners)
 if ind == 1
     topLeftIndex = 3;
 elseif ind == 2

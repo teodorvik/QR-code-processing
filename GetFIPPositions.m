@@ -12,13 +12,10 @@ function centerPoints = GetFIPPositions(image)
 %% Apply sobel filter
 
 edgeImage = Sobel(mat2gray(image), 0.5);
-%subplot(1,2,1), imshow(image)
-%subplot(1,2,2), imshow(edgeImage)
 
 %% Search for FIP candidates
 
 fipPoints = FIPLineScan(edgeImage, 0.2);
-% imshow(edgeImage); hold on; plot(fipPoints(:,2), fipPoints(:,1), 'x');
 
 %% Find three clusters of points
 % Is three replicates enough?
@@ -27,16 +24,16 @@ fipPoints = FIPLineScan(edgeImage, 0.2);
 
 centerPoints = [centerPoints(:,2) centerPoints(:,1)];
 
-figure;
-imshow(image);
-hold on;
-plot(fipPoints(idx==1,2),fipPoints(idx==1,1),'r.','MarkerSize',12)
-plot(fipPoints(idx==2,2),fipPoints(idx==2,1),'g.','MarkerSize',12)
-plot(fipPoints(idx==3,2),fipPoints(idx==3,1),'b.','MarkerSize',12)
-plot(centerPoints(:,1),centerPoints(:,2),'wx',...
-     'MarkerSize',15,'LineWidth',3)
-legend('Cluster 1','Cluster 2', 'Cluster3', 'Centroids',...
-       'Location','NW')
-title 'Cluster Assignments and Centroids'
-hold off
+% figure;
+% imshow(image);
+% hold on;
+% plot(fipPoints(idx==1,2),fipPoints(idx==1,1),'r.','MarkerSize',12)
+% plot(fipPoints(idx==2,2),fipPoints(idx==2,1),'g.','MarkerSize',12)
+% plot(fipPoints(idx==3,2),fipPoints(idx==3,1),'b.','MarkerSize',12)
+% plot(centerPoints(:,1),centerPoints(:,2),'wx',...
+%      'MarkerSize',15,'LineWidth',3)
+% legend('Cluster 1','Cluster 2', 'Cluster3', 'Centroids',...
+%        'Location','NW')
+% title 'Cluster Assignments and Centroids'
+% hold off
 
