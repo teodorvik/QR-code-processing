@@ -13,9 +13,11 @@ http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5403098
 2. ~~Gradient calculation (sobel)~~
 3. ~~Binarization~~
 4. ~~Line sweep, get FIP candidates~~
+ * Needs improval. It's shit with noisy images.
+ * Removal of outliers might be needed.
 
 ### Mikael
-Find corners of QR
+~~Find corners of QR~~
 
 ### Teodor
 ~~Calculate rotation and translation at the given FIP:s.~~

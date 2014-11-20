@@ -1,7 +1,5 @@
 function cornerPoints = GetQRCorners(image, centerPoints)
 
-cornerPoints = zeros(4,2);
-
 % find a good value for the radius in which the entire fip should be
 % located
 d = sort(pdist(centerPoints));
@@ -106,11 +104,82 @@ centroid = sum(centerPoints)/3;
 
 % Use centroid to find the outmost corners of the fips. (Four corner points
 % are stored in allPoints for each FIP).
-cornerDistFromCentroid = sqrt((allCorners(1,:) - centroid(1)).^2+(allCorners(2,:) - centroid(2)).^2)
+cornerDistFromCentroid = sqrt((allCorners(1,:) - centroid(1)).^2+(allCorners(2,:) - centroid(2)).^2);
 cornerPoints(1,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(1:4))));
 cornerPoints(2,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(5:8))));
 cornerPoints(3,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(9:12))));
 
 % TO DO
 % Find the fourth corner of the QR-pattern
+
+%% Calculate the distances between pair of points
+distancesFips = pdist(cornerPoints(1:3,:));
+% distancesFips(1) = distance between 2 and 1
+% distancesFips(2) = distance between 3 and 1
+% distancesFips(3) = distance between 3 and 2
+
+%% Since we know which FIPs that got the most distance between them we also
+% know that the remaining FIP is the top left FIP.
+distancesFips
+[maxVal ind] = max(distancesFips)
+if ind == 1
+    topLeftIndex = 3;
+elseif ind == 2
+    topLeftIndex = 2;
+elseif ind == 3
+    topLeftIndex = 1;
+end
+
+cornerIndices = [1 2 3];
+unknownCorners = cornerIndices(cornerIndices~=topLeftIndex);
+
+%% Set the cornerpoints in the correct order so we can translate them later
+% correct order: topleft, topright, bottomleft, bottomright
+topLeft = cornerPoints(topLeftIndex,:);
+unknownCorner1 = cornerPoints(unknownCorners(1),:);
+unknownCorner2 = cornerPoints(unknownCorners(2),:);
+
+if (GetAngle(unknownCorner1-topLeft) < GetAngle(unknownCorner2-topLeft))
+    cornerPoints(1,:) = topLeft;
+    cornerPoints(2,:) = unknownCorner1;
+    cornerPoints(3,:) = unknownCorner2;
+    topRightIndex = unknownCorners(1);
+    bottomLeftIndex = unknownCorners(2);
+else
+    cornerPoints(1,:) = topLeft;
+    cornerPoints(2,:) = unknownCorner2;
+    cornerPoints(3,:) = unknownCorner1;
+    topRightIndex = unknownCorners(2);
+    bottomLeftIndex = unknownCorners(1);
+end
+
+%% Find the the other points that will form a line towards the fourth corner
+% It's a bit hard to explain. I think an educational illustration is
+% required here:
+% 
+
+% Create centroid in the top left corner.
+centroid = topLeft;
+
+% Use centroid to find the outmost corners of the fips. (Four corner points
+% are stored in allPoints for each FIP).
+cornerDistFromCentroid = sqrt((allCorners(1,:) - centroid(1)).^2+(allCorners(2,:) - centroid(2)).^2);
+find(cornerDistFromCentroid==max(cornerDistFromCentroid((topRightIndex-1)*4+1:(topRightIndex-1)*4+4)))
+find(cornerDistFromCentroid==max(cornerDistFromCentroid((bottomLeftIndex-1)*4+1:(bottomLeftIndex-1)*4+4)))
+topRightSecondPoint = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid((topRightIndex-1)*4+1:(topRightIndex-1)*4+4))));
+bottomLeftSecondPoint = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid((bottomLeftIndex-1)*4+1:(bottomLeftIndex-1)*4+4))));
+
+%% Calculate where the two lines intersect to find the fourth corner
+% line equations i.e. y = k*x + m
+% Dont know if it will work with division by 0
+k1 = (cornerPoints(2,2)-topRightSecondPoint(2))/(cornerPoints(2,1)-topRightSecondPoint(1));
+m1 = (topRightSecondPoint(2)-k1*topRightSecondPoint(1));
+k2 = (cornerPoints(3,2)-bottomLeftSecondPoint(2))/(cornerPoints(3,1)-bottomLeftSecondPoint(1));
+m2 = (bottomLeftSecondPoint(2)-k2*bottomLeftSecondPoint(1));
+
+fourthCornerX = (m2 - m1)/(k1 - k2);
+fourthCornerY = k1*fourthCornerX+m1;
+
+cornerPoints(4,:) = [fourthCornerX, fourthCornerY];
+
 
