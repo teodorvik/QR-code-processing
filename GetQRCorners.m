@@ -78,7 +78,7 @@ for fipIndex = 1:3
     end
      
 %     figure;
-%     imshow(I);
+%     imshow(Ifinal);
 %     hold on;
 %     plot(xCorners, yCorners,  'rs', 'MarkerSize', 10, 'LineWidth', 3);
     
@@ -157,10 +157,19 @@ bottomLeftSecondPoint = allCorners(:,find(cornerDistFromCentroid==max(cornerDist
 
 %% Calculate where the two lines intersect to find the fourth corner
 % line equations i.e. y = k*x + m
-% Dont know if it will work with division by 0
-k1 = (cornerPoints(2,2)-topRightSecondPoint(2))/(cornerPoints(2,1)-topRightSecondPoint(1));
+dx1 = cornerPoints(2,2)-topRightSecondPoint(2);
+dx2 = cornerPoints(3,2)-bottomLeftSecondPoint(2);
+dy1 = cornerPoints(2,1)-topRightSecondPoint(1);
+dy2 = cornerPoints(3,1)-bottomLeftSecondPoint(1);
+
+if  dy1 == 0.0
+    fprintf('DELA MED NOLL!');
+    % Här behöver göras lite skit
+end
+
+k1 = dx1/dy1
 m1 = (topRightSecondPoint(2)-k1*topRightSecondPoint(1));
-k2 = (cornerPoints(3,2)-bottomLeftSecondPoint(2))/(cornerPoints(3,1)-bottomLeftSecondPoint(1));
+k2 = dx2/dy2;
 m2 = (bottomLeftSecondPoint(2)-k2*bottomLeftSecondPoint(1));
 
 fourthCornerX = (m2 - m1)/(k1 - k2);
