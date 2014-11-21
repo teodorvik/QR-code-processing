@@ -13,8 +13,8 @@ http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5403098
 2. ~~Gradient calculation (sobel)~~
 3. ~~Binarization~~
 4. ~~Line sweep, get FIP candidates~~
- * Needs improval. It's shit with noisy images.
  * Removal of outliers might be needed.
+ * Shit when QR-code is small part of the entire image
 
 ### Mikael
 ~~Find corners of QR~~
@@ -40,4 +40,3 @@ strout = readQR(QRData);
 
 ### Known errors
 'images/set5/Hus_4e.png' doesn't transform correctly. Needs a fourth FIP inorder to work.
-'images/set1/Bygg_1c.png' wrong FIPS obtained. image is noisy and a lot of FIP candidates are found in the noise.
