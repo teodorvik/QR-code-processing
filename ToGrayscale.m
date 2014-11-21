@@ -11,6 +11,7 @@
 %
 
 function[grayImage] = ToGrayscale(points, image)
+image = double(image);
 % -----------------------------
 % Initialize variables
 % -----------------------------
@@ -21,6 +22,8 @@ stepSize = round((points(2,1) - points(1,1)) / 41);
 imageSize = size(image); % imageSize(1) = length in y
 
 % Obtain the value of a black QR-pixel for each corner
+% sometimes tries to access image(0,0) that doesnt exist. should it be ceil
+% instead of round?
 topLeftBlack = image(round(stepSize * 0.5), round(stepSize * 0.5));
 topRightBlack = image(round(stepSize * 0.5), imageSize(2) - round(stepSize * 0.5));
 bottomLeftBlack = image(imageSize(1) - round(stepSize * 0.5),  round(stepSize * 0.5));

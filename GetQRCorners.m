@@ -19,6 +19,8 @@ for fipIndex = 1:3
     % Find corners of the square by finding out how far the centroid is
     % from points in each quadrant.
     % Doesnt work for squares that are rotated a lot.
+    % Could be possible to use one of matlabs build in corner detection
+    % functions
     
     % First get all the points.
     [rows columns] = find(Ifinal);
@@ -105,8 +107,7 @@ distancesCorners = pdist(cornerPoints(1:3,:));
 
 %% Since we know which corner that got the most distance between them we also
 % know that the remaining corner is the top left corner.
-distancesCorners
-[maxVal ind] = max(distancesCorners)
+[maxVal ind] = max(distancesCorners);
 if ind == 1
     topLeftIndex = 3;
 elseif ind == 2
