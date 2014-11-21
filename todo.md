@@ -40,3 +40,4 @@ strout = readQR(QRData);
 
 ### Known errors
 'images/set5/Hus_4e.png' doesn't transform correctly. Needs a fourth FIP inorder to work.
+'images/set1/Bygg_1c.png' wrong FIPS obtained. image is noisy and a lot of FIP candidates are found in the noise.
