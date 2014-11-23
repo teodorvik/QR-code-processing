@@ -30,7 +30,7 @@ tformedImage = TransformAndCropQR(QRCorners, image);
 figure; imshow(tformedImage)
 
 % Convert to grayscale and compensate for uneven illumination.
-grayImage = ToGrayscale(tformedFips, tformedImage);
+grayImage = ToGrayscale(tformedImage);
 
 % Create a 41*41 matrix of all points after rotation and translation.
 QRData = CreateBitmap(grayImage);

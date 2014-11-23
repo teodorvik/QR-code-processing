@@ -1,20 +1,6 @@
-% TODO: remove loop for speed? 
-%
-% Input:
-% Translated and rotated image consisting of ones and zeros
-% stepSize (size of one QR-pixel)
-% 
-% Output:
-% This function will return a 41x41 matrix of ones and zeros
-%
-% Points for testImage5.png
-% points5 = [66 195; 406 195; 66 536];
+% Converts image to 41x41 matrix
 
 function[bitmap] = CreateBitmap(image)
-
-% -----------------------------
-% Loop through the entire QR image
-% -----------------------------
 
 % Preallocate for speed
 bitmap = zeros(41,41);
@@ -25,6 +11,7 @@ bitmap = zeros(41,41);
 
 stepSize = yMax / 41;
 
+% TODO: Possible to remove loop?
 for i = 1:41
     posX = round(stepSize * (i - 1)) + 1;
     posXNext = round(posX + stepSize);
@@ -49,8 +36,8 @@ for i = 1:41
         %plot(posX, posY, '-r+');
         %plot(posXNext, posYNext, '-r+');
         
-        % TODO: Find a good way to determine threshold value
-        if (meanValue >= 0.6)
+        % TODO: Find a good way to determine threshold value?
+        if (meanValue >= 0.48)
             bitmap(j,i) = 1;
         else
             bitmap(j,i) = 0;
