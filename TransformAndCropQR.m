@@ -21,32 +21,12 @@ perfect_bottom_right = [perfect_top_right(1), perfect_top_right(2) + minlength];
 perfect_qr = [perfect_top_left; perfect_top_right; perfect_bottom_left; perfect_bottom_right];
 
 %% Create the transformation matrix 
-%perfect_qr = [perfect_qr ones(length(perfect_qr), 1)];
-%fips = [fips ones(length(perfect_qr),1)];
-tform = fips\perfect_qr;
-%last_column = [0.0; 0.0; 1.0];
-%tform = [tform(:,1:2) last_column];
+T = maketform('projective', fips, perfect_qr);
 
 %% Transform and crop the image
-% The transformed fips will have the same values as perfect_qr. Just return
-% to columns we want from prefect_qr.
-% tform = tform';
-T = maketform('projective', fips, perfect_qr); 
-% cp2tform(fips, perfect_qr, 'projective');
-%tformedImage = imwarp(image, T, 'OutputView', imref2d(size(image)));
-tformedImage = imtransform(image, T);
-figure; imshow(tformedImage)
-prutt = fips*tform;
-fips*tform - perfect_qr
-hold on;
-plot(prutt(:,1), prutt(:,2),  'rs', 'MarkerSize', 10, 'LineWidth', 3);
-
-for i = 1:length(prutt)
-    t(i) = text(prutt(i,1),prutt(i,2),int2str(i));
-end
-set(t(:),'fontw','bold','fonts',12)
-
-tformedFips = perfect_qr(:, 1:2);
-
-croppedImage = CropImage(tformedFips, tformedImage);
+% xdata and ydata from imtransform are how much imtransform have translated
+% the image. In CropImage we compensate for those values.
+[tformedImage,xdata,ydata] = imtransform(image, T, 'XYScale', 1);
+tformedFips = perfect_qr;
+croppedImage = CropImage(tformedFips, tformedImage, xdata, ydata);
 
