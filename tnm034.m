@@ -29,11 +29,12 @@ QRCorners = GetQRCorners(image, FIPPositions);
 tformedImage = TransformAndCropQR(QRCorners, image);
 figure; imshow(tformedImage)
 
-% Convert to grayscale and compensate for uneven illumination.
-grayImage = ToGrayscale(tformedImage);
+% Compensate for uneven illumination. Returns an image containing only 0:s
+% and 1:s
+blackAndWhiteImage = RemoveIllumination(tformedImage);
 
 % Create a 41*41 matrix of all points after rotation and translation.
-QRData = CreateBitmap(grayImage);
+QRData = CreateBitmap(blackAndWhiteImage);
 
 % Determine text from perfect points by reading QR_data pixel by pixel.
 % Convert to ASCII symbols.
