@@ -32,10 +32,9 @@ Change the function to use the four corners instead.
 ~~Handle noise (our process ignores noise).~~
 
 ### Anton
-Determine text from perfect points by reading QR_data pixel by pixel.
-Convert to ASCII symbols.
-Put strout as the resulting text.
-strout = readQR(QRData);
+~~Determine text from perfect points by reading QR_data pixel by pixel.~~
+~~Convert to ASCII symbols.~~
+~~Put strout as the resulting text.~~
 
 ### Known errors
-'images/set5/Hus_4e.png' doesn't transform correctly. Needs a fourth FIP in order to work.
+'images/set5/Hus_4c.png' and 'images/set5/Hus_4d.png' doesn't transform correctly. Needs a fourth point in order to work.
