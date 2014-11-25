@@ -17,19 +17,19 @@ http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5403098
  * Shit when QR-code is small part of the entire image
 
 ### Mikael
-~~Find corners of QR~~
+~~Find corners of QR.~~
 
 ### Teodor
 ~~Calculate rotation and translation at the given FIP:s.~~
 Change the function to use the four corners instead.
 
 ### Oscar
-~~Extract background using sliding maximum~~
-~~Compensate for background illumination~~
+~~Extract background using sliding maximum.~~
+~~Compensate for background illumination.~~
 
 ### Oscar
-~~Create a 41*41 matrix of the image with removed illumination~~
-~~Handle noise (our process ignores noise)~~
+~~Create a 41*41 matrix of the image with removed illumination.~~
+~~Handle noise (our process ignores noise).~~
 
 ### Anton
 Determine text from perfect points by reading QR_data pixel by pixel.
