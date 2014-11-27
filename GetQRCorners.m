@@ -15,6 +15,7 @@ for fipIndex = 1:3
     Ifill = imfill(Ibw,'holes');
     Iarea = bwareaopen(Ifill, floor(max(size(I))*0.5)^2); % Removes small objects 
     Ifinal = bwlabel(Iarea);
+%     figure; imshowpair(I, Ifinal);
 
     % Find corners of the square by finding out how far the centroid is
     % from points in each quadrant.

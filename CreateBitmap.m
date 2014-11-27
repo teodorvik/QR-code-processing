@@ -7,9 +7,9 @@ bitmap = zeros(41,41);
 [yMax, xMax] = size(image);
 
 % Used for debugging
-%figure;
-%imshow(image);
-%hold on;
+% figure;
+% imshow(image);
+% hold on;
 
 stepSize = yMax / 41;
 
@@ -41,6 +41,6 @@ for i = 1:41
     end
 end
 
-bitmap = bitmap > 0.44;
+bitmap = bitmap > 0.5;
 
 %hold off;
