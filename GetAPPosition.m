@@ -14,7 +14,7 @@ if apCenter(1) + r > cols
 end
 
 apImageCrop = image((apCenter(2)-r):(apCenter(2)+r), (apCenter(1)-r):(apCenter(1)+r));
-imshow(apImageCrop);
+% imshow(apImageCrop);
 
 perfectAP = [1 1 1 1 1; 1 0 0 0 1; 1 0 1 0 1; 1 0 0 0 1; 1 1 1 1 1];
 perfectAP = imresize(perfectAP, [5*dyPixel 5*dxPixel], 'box');
