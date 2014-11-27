@@ -13,20 +13,23 @@ FIPPositions = GetFIPPositions(image);
 % hold on;
 % plot(FIPPositions(3,1), FIPPositions(3,2),  'rs', 'MarkerSize', 10, 'LineWidth', 3);
 
-%% Get the four corners of QR-pattern. Not done
+%% Get the four corners of QR-pattern.
 QRCorners = GetQRCorners(image, FIPPositions);
-% figure;
-% imshow(image);
-% hold on;
-% plot(QRCorners(:,1), QRCorners(:,2),  'rs', 'MarkerSize', 10, 'LineWidth', 3);
-% 
-% for i = 1:length(QRCorners)
-%     t(i) = text(QRCorners(i,1),QRCorners(i,2),int2str(i));
-% end
-% set(t(:),'fontw','bold','fonts',12)
+figure;
+imshow(image);
+hold on;
+plot(QRCorners(:,1), QRCorners(:,2),  'rs', 'MarkerSize', 10, 'LineWidth', 3);
+
+for i = 1:length(QRCorners)
+    t(i) = text(QRCorners(i,1),QRCorners(i,2),int2str(i));
+end
+set(t(:),'fontw','bold','fonts',12)
+
+%% Get the alignment point (AP)
+APPosition = GetAPPosition(image, QRCorners);
 
 %% Transform the given FIP:s for easier computation later.
-tformedImage = TransformAndCropQR(QRCorners, image);
+tformedImage = TransformAndCropQR(QRCorners, APPosition, image);
 figure; imshow(tformedImage)
 
 % Compensate for uneven illumination. Returns an image containing only 0:s

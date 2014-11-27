@@ -98,7 +98,6 @@ cornerDistFromCentroid = sqrt((allCorners(1,:) - centroid(1)).^2+(allCorners(2,:
 cornerPoints(1,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(1:4))));
 cornerPoints(2,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(5:8))));
 cornerPoints(3,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(9:12))));
-
 %% Calculate the distances between pair of points
 distancesCorners = pdist(cornerPoints(1:3,:));
 % distancesCorners(1) = distance between 2 and 1
@@ -139,6 +138,25 @@ else
     bottomLeftIndex = unknownCorners(1);
 end
 
+%%
+
+% edgeImage = Sobel(mat2gray(apImageCrop), 0.5);
+% apPoints = APLineScan(edgeImage, 0.1);
+% 
+% [idx,centerPoints] = kmeans(apPoints,1,'Distance','cityblock',...
+%     'Replicates',4);
+% centerPoints = [centerPoints(:,2) centerPoints(:,1)];
+% figure;
+% imshow(edgeImage);
+% hold on;
+% plot(apPoints(idx==1,2),apPoints(idx==1,1),'r.','MarkerSize',12)
+% plot(centerPoints(:,1),centerPoints(:,2),'wx',...
+%      'MarkerSize',15,'LineWidth',3)
+% legend('Cluster 1', 'Centroid',...
+%        'Location','NW')
+% hold off
+
+
 %% Find the the other points that will form a line towards the fourth corner
 % It's a bit hard to explain. I think an educational illustration is
 % required here:
@@ -150,31 +168,29 @@ centroid = topLeft;
 % Use centroid to find the outmost corners of the fips. (Four corner points
 % are stored in allPoints for each FIP).
 cornerDistFromCentroid = sqrt((allCorners(1,:) - centroid(1)).^2+(allCorners(2,:) - centroid(2)).^2);
-find(cornerDistFromCentroid==max(cornerDistFromCentroid((topRightIndex-1)*4+1:(topRightIndex-1)*4+4)))
-find(cornerDistFromCentroid==max(cornerDistFromCentroid((bottomLeftIndex-1)*4+1:(bottomLeftIndex-1)*4+4)))
-topRightSecondPoint = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid((topRightIndex-1)*4+1:(topRightIndex-1)*4+4))));
+find(cornerDistFromCentroid==max(cornerDistFromCentroid((topRightIndex-1)*4+1:(topRightIndex-1)*4+4)));
+find(cornerDistFromCentroid==max(cornerDistFromCentroid((bottomLeftIndex-1)*4+1:(bottomLeftIndex-1)*4+4)));
+topRightSecondPoint = allCorners(:,cornerDistFromCentroid==max(cornerDistFromCentroid((topRightIndex-1)*4+1:(topRightIndex-1)*4+4)));
 bottomLeftSecondPoint = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid((bottomLeftIndex-1)*4+1:(bottomLeftIndex-1)*4+4))));
 
 %% Calculate where the two lines intersect to find the fourth corner
 % line equations i.e. y = k*x + m
-dx1 = cornerPoints(2,2)-topRightSecondPoint(2);
-dx2 = cornerPoints(3,2)-bottomLeftSecondPoint(2);
-dy1 = cornerPoints(2,1)-topRightSecondPoint(1);
-dy2 = cornerPoints(3,1)-bottomLeftSecondPoint(1);
-
-if  dy1 == 0.0
-    fprintf('DELA MED NOLL!');
-    % Här behöver göras lite skit
-end
-
-k1 = dx1/dy1
-m1 = (topRightSecondPoint(2)-k1*topRightSecondPoint(1));
-k2 = dx2/dy2;
-m2 = (bottomLeftSecondPoint(2)-k2*bottomLeftSecondPoint(1));
-
-fourthCornerX = (m2 - m1)/(k1 - k2);
-fourthCornerY = k1*fourthCornerX+m1;
-
-cornerPoints(4,:) = [fourthCornerX, fourthCornerY];
-
-
+% dx1 = cornerPoints(2,1)-topRightSecondPoint(1);
+% dx2 = cornerPoints(3,1)-bottomLeftSecondPoint(1);
+% dy1 = cornerPoints(2,2)-topRightSecondPoint(2);
+% dy2 = cornerPoints(3,2)-bottomLeftSecondPoint(2);
+% 
+% if  dy1 == 0.0
+%     fprintf('DELA MED NOLL!');
+%     % Här behöver göras lite skit
+% end
+% 
+% k1 = dy1/dx1;
+% m1 = (topRightSecondPoint(2)-k1*topRightSecondPoint(1));
+% k2 = dy2/dx2;
+% m2 = (bottomLeftSecondPoint(2)-k2*bottomLeftSecondPoint(1));
+% 
+% fourthCornerX = (m2 - m1)/(k1 - k2);
+% fourthCornerY = k1*fourthCornerX+m1;
+% 
+% cornerPoints(4,:) = [fourthCornerX, fourthCornerY];

@@ -14,11 +14,9 @@ function centerPoints = GetFIPPositions(image)
 image = wiener2(image, [3 3]);
 
 %% Apply sobel filter
-
 edgeImage = Sobel(mat2gray(image), 0.5);
 
 %% Search for FIP candidates
-
 fipPoints = FIPLineScan(edgeImage, 0.1);
 
 %% Find three clusters of points
