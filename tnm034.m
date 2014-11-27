@@ -27,7 +27,7 @@ QRCorners = GetQRCorners(image, FIPPositions);
 
 %% Transform the given FIP:s for easier computation later.
 tformedImage = TransformAndCropQR(QRCorners, image);
-figure; imshow(tformedImage)
+%figure; imshow(tformedImage)
 
 % Compensate for uneven illumination. Returns an image containing only 0:s
 % and 1:s

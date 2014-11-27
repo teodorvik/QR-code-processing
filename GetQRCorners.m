@@ -147,6 +147,17 @@ end
 % Create centroid in the top left corner.
 centroid = topLeft;
 
+imtool(image);
+figure;
+imshow(image);
+hold on;
+plot(allCorners(1,:), allCorners(2,:),  'rs', 'MarkerSize', 10, 'LineWidth', 3);
+
+for i = 1:length(allCorners)
+    t(i) = text(allCorners(1,i),allCorners(2,i),int2str(i));
+end
+set(t(:),'fontw','bold','fonts',12)
+
 % Use centroid to find the outmost corners of the fips. (Four corner points
 % are stored in allPoints for each FIP).
 cornerDistFromCentroid = sqrt((allCorners(1,:) - centroid(1)).^2+(allCorners(2,:) - centroid(2)).^2);
