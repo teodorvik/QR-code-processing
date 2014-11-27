@@ -1,5 +1,8 @@
 # Build files
 *.asv
 
-
 *.m~
+
+*.md~
+
+testout.txt

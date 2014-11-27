@@ -17,26 +17,24 @@ http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5403098
  * Shit when QR-code is small part of the entire image
 
 ### Mikael
-~~Find corners of QR~~
+~~Find corners of QR.~~
 
 ### Teodor
 ~~Calculate rotation and translation at the given FIP:s.~~
 Change the function to use the four corners instead.
 
 ### Oscar
-Convert to grayscale.
-Look at the lecture slides. Base illumination on maxvalue.
-Compensate for uneven illumination.
-Move the cropping from ToGrayscale to the TransformFIPS function instead? Makes more sense.
+~~Extract background using sliding maximum.~~
+~~Compensate for background illumination.~~
 
 ### Oscar
-Create a 41*41 matrix of all points after rotation and translation.
+~~Create a 41*41 matrix of the image with removed illumination.~~
+~~Handle noise (our process ignores noise).~~
 
 ### Anton
-Determine text from perfect points by reading QR_data pixel by pixel.
-Convert to ASCII symbols.
-Put strout as the resulting text.
-strout = readQR(QRData);
+~~Determine text from perfect points by reading QR_data pixel by pixel.~~
+~~Convert to ASCII symbols.~~
+~~Put strout as the resulting text.~~
 
 ### Known errors
-'images/set5/Hus_4e.png' doesn't transform correctly. Needs a fourth FIP inorder to work.
+'images/set5/Hus_4c.png' and 'images/set5/Hus_4d.png' doesn't transform correctly. Needs a fourth point in order to work.
