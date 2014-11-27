@@ -7,7 +7,9 @@ bitmap = zeros(41,41);
 [yMax, xMax] = size(image);
 
 % Used for debugging
-hold on;
+%figure;
+%imshow(image);
+%hold on;
 
 stepSize = yMax / 41;
 
@@ -33,10 +35,9 @@ for i = 1:41
         meanValue = mean(mean(tempImage));
         
         % Used for debugging
-        plot(posX, posY, '-r+');
-        plot(posXNext, posYNext, '-r+');
+%         plot(posX, posY, '-r+');
+%         plot(posXNext, posYNext, '-r+');
         
-        % TODO: Find a good way to determine threshold value?
         if (meanValue >= 0.48)
             bitmap(j,i) = 1;
         else
@@ -44,3 +45,5 @@ for i = 1:41
         end
     end
 end
+
+%hold off;

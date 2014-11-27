@@ -3,6 +3,6 @@
 
 function[grayImage] = RemoveIllumination(image)
 
-localMaxImage = imdilate(image, true(size(image, 1)));
-grayImage = image./localMaxImage;
-grayImage = grayImage>0.48;
+background = imdilate(image, true(size(image, 1)));
+grayImage = image./background;
+grayImage = grayImage > 0.44;

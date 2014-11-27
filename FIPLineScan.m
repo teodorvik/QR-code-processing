@@ -4,6 +4,10 @@ assert(isa(strictness, 'double'));
 
 [rows columns] = size(binaryImage);
 positions = zeros(0, 2);
+verticalScanPoints = zeros(0,3);
+horizontalScanPoints = zeros(0,3);
+diagonalScanPoints1 = zeros(0,3);
+diagonalScanPoints2 = zeros(0,3);
 
 %% horizontal scan
 % scan one row at a time
@@ -28,7 +32,9 @@ for j = 1:rows
                     if(CheckFIPPointsRatio(currentPoints, strictness))
                         % Fip candidate found
                         % Add to the positions array
-                        positions = [positions; 0.5*(currentPoints(1,:)+currentPoints(6,:))];
+                        % positions = [positions; 0.5*(currentPoints(1,:)+currentPoints(6,:))];
+                        bigSquareLength = length(currentPoints(4,:) - currentPoints(3,:));
+                        horizontalScanPoints = [horizontalScanPoints; 0.5*(currentPoints(1,:)+currentPoints(6,:)), bigSquareLength];
                     end
                 end
             end
@@ -59,7 +65,9 @@ for i = 1:columns
                     if(CheckFIPPointsRatio(currentPoints, strictness))
                         % Fip candidate found
                         % Add to the positions array
-                        positions = [positions; 0.5*(currentPoints(1,:)+currentPoints(6,:))];
+                        % positions = [positions; 0.5*(currentPoints(1,:)+currentPoints(6,:))];
+                        bigSquareLength = length(currentPoints(4,:) - currentPoints(3,:));
+                        verticalScanPoints = [verticalScanPoints; 0.5*(currentPoints(1,:)+currentPoints(6,:)), bigSquareLength];                    
                     end
                 end
             end
@@ -90,7 +98,9 @@ for currCol = columns: -1: 2
                     if(CheckFIPPointsRatio(currentPoints, strictness))
                         % Fip candidate found
                         % Add to the positions array
-                        positions = [positions; 0.5*(currentPoints(1,:)+currentPoints(6,:))];
+                        % positions = [positions; 0.5*(currentPoints(1,:)+currentPoints(6,:))];
+                        bigSquareLength = length(currentPoints(4,:) - currentPoints(3,:));
+                        diagonalScanPoints1 = [diagonalScanPoints1; 0.5*(currentPoints(1,:)+currentPoints(6,:)), bigSquareLength];
                     end
                 end
             end
@@ -120,7 +130,9 @@ for currRow = 1:rows
                     if(CheckFIPPointsRatio(currentPoints, strictness))
                         % Fip candidate found
                         % Add to the positions array
-                        positions = [positions; 0.5*(currentPoints(1,:)+currentPoints(6,:))];
+                        % positions = [positions; 0.5*(currentPoints(1,:)+currentPoints(6,:))];
+                        bigSquareLength = length(currentPoints(4,:) - currentPoints(3,:));
+                        diagonalScanPoints1 = [diagonalScanPoints1; 0.5*(currentPoints(1,:)+currentPoints(6,:)), bigSquareLength];
                     end
                 end
             end
@@ -151,7 +163,9 @@ for currCol = 1:(columns - 1)
                     if(CheckFIPPointsRatio(currentPoints, strictness))
                         % Fip candidate found
                         % Add to the positions array
-                        positions = [positions; 0.5*(currentPoints(1,:)+currentPoints(6,:))];
+                        % positions = [positions; 0.5*(currentPoints(1,:)+currentPoints(6,:))];
+                        bigSquareLength = length(currentPoints(4,:) - currentPoints(3,:));
+                        diagonalScanPoints2 = [diagonalScanPoints2; 0.5*(currentPoints(1,:)+currentPoints(6,:)), bigSquareLength];
                     end
                 end
             end
@@ -181,7 +195,9 @@ for currRow = 1:rows
                     if(CheckFIPPointsRatio(currentPoints, strictness))
                         % Fip candidate found
                         % Add to the positions array
-                        positions = [positions; 0.5*(currentPoints(1,:)+currentPoints(6,:))];
+                        % positions = [positions; 0.5*(currentPoints(1,:)+currentPoints(6,:))];
+                        bigSquareLength = length(currentPoints(4,:) - currentPoints(3,:));
+                        diagonalScanPoints2 = [diagonalScanPoints2; 0.5*(currentPoints(1,:)+currentPoints(6,:)), bigSquareLength];
                     end
                 end
             end
@@ -190,3 +206,21 @@ for currRow = 1:rows
         end
     end
 end
+
+%% Remove unwanted points
+fipLength = (sum(sum(verticalScanPoints(:,3))/length(verticalScanPoints) + ...
+                sum(horizontalScanPoints(:,3))/length(horizontalScanPoints) + ...
+                sum(diagonalScanPoints1(:,3))/length(diagonalScanPoints1) + ...
+                sum(diagonalScanPoints2(:,3))/length(diagonalScanPoints2))/4)*2;
+
+indices = zeros(1,0);
+
+positions = RemoveBadPoints(verticalScanPoints, horizontalScanPoints, ...
+                            diagonalScanPoints1, diagonalScanPoints2, fipLength);
+
+%positions = [verticalScanPoints; horizontalScanPoints; diagonalScanPoints1; diagonalScanPoints2];
+% figure;
+% imshow(binaryImage);
+% hold on;
+% plot(positions(:,2),positions(:,1),'r.','MarkerSize',12)
+% hold off

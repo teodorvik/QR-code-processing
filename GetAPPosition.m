@@ -1,9 +1,10 @@
-function centerPoint = GetFIPPositions(image, cornerPoints)
+function centerPoint = GetAPPosition(image, cornerPoints)
 
 dxPixel = (cornerPoints(2,1)-cornerPoints(1,1))/41;
 dyPixel = (cornerPoints(3,2)-cornerPoints(1,2))/41;
 apCenter = [cornerPoints(1,1)+dxPixel*34.5, cornerPoints(1,2)+dyPixel*34.5];
-r = ceil(max(dxPixel,dyPixel)*10);
+% why does this get a warning?
+r = ceil(max([dxPixel dyPixel])*10);
 apImageCrop = image((apCenter(2)-r):(apCenter(2)+r), (apCenter(1)-r):(apCenter(1)+r));
 
 perfectAP = [1 1 1 1 1; 1 0 0 0 1; 1 0 1 0 1; 1 0 0 0 1; 1 1 1 1 1];
