@@ -5,5 +5,4 @@ function[grayImage] = RemoveIllumination(image)
 
 background = imdilate(image, true(size(image, 1)));
 grayImage = image./background;
-smallestValue = min(min(background));
-grayImage = grayImage>=smallestValue;
+grayImage = grayImage > 0.44;
