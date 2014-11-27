@@ -61,4 +61,5 @@ function[positions] = RemoveBadPoints(ScanPoints1, ScanPoints2, ScanPoints3, Sca
     end
     
     positions = [ScanPoints1; ScanPoints2; ScanPoints3; ScanPoints4];
+    
 end
