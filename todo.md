@@ -37,4 +37,3 @@ Change the function to use the four corners instead.
 ~~Put strout as the resulting text.~~
 
 ### Known errors
-'images/set5/Hus_4c.png' and 'images/set5/Hus_4d.png' doesn't transform correctly. Needs a fourth point in order to work.

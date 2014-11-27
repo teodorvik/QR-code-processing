@@ -15,6 +15,7 @@ for fipIndex = 1:3
     Ifill = imfill(Ibw,'holes');
     Iarea = bwareaopen(Ifill, floor(max(size(I))*0.5)^2); % Removes small objects 
     Ifinal = bwlabel(Iarea);
+%     figure; imshowpair(I, Ifinal);
 
     % Find corners of the square by finding out how far the centroid is
     % from points in each quadrant.
@@ -98,7 +99,6 @@ cornerDistFromCentroid = sqrt((allCorners(1,:) - centroid(1)).^2+(allCorners(2,:
 cornerPoints(1,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(1:4))));
 cornerPoints(2,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(5:8))));
 cornerPoints(3,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(9:12))));
-
 %% Calculate the distances between pair of points
 distancesCorners = pdist(cornerPoints(1:3,:));
 % distancesCorners(1) = distance between 2 and 1
@@ -138,54 +138,4 @@ else
     topRightIndex = unknownCorners(2);
     bottomLeftIndex = unknownCorners(1);
 end
-
-%% Find the the other points that will form a line towards the fourth corner
-% It's a bit hard to explain. I think an educational illustration is
-% required here:
-% 
-
-% Create centroid in the top left corner.
-centroid = topLeft;
-
-imtool(image);
-figure;
-imshow(image);
-hold on;
-plot(allCorners(1,:), allCorners(2,:),  'rs', 'MarkerSize', 10, 'LineWidth', 3);
-
-for i = 1:length(allCorners)
-    t(i) = text(allCorners(1,i),allCorners(2,i),int2str(i));
-end
-set(t(:),'fontw','bold','fonts',12)
-
-% Use centroid to find the outmost corners of the fips. (Four corner points
-% are stored in allPoints for each FIP).
-cornerDistFromCentroid = sqrt((allCorners(1,:) - centroid(1)).^2+(allCorners(2,:) - centroid(2)).^2);
-find(cornerDistFromCentroid==max(cornerDistFromCentroid((topRightIndex-1)*4+1:(topRightIndex-1)*4+4)))
-find(cornerDistFromCentroid==max(cornerDistFromCentroid((bottomLeftIndex-1)*4+1:(bottomLeftIndex-1)*4+4)))
-topRightSecondPoint = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid((topRightIndex-1)*4+1:(topRightIndex-1)*4+4))));
-bottomLeftSecondPoint = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid((bottomLeftIndex-1)*4+1:(bottomLeftIndex-1)*4+4))));
-
-%% Calculate where the two lines intersect to find the fourth corner
-% line equations i.e. y = k*x + m
-dx1 = cornerPoints(2,2)-topRightSecondPoint(2);
-dx2 = cornerPoints(3,2)-bottomLeftSecondPoint(2);
-dy1 = cornerPoints(2,1)-topRightSecondPoint(1);
-dy2 = cornerPoints(3,1)-bottomLeftSecondPoint(1);
-
-if  dy1 == 0.0
-    fprintf('DELA MED NOLL!');
-    % Här behöver göras lite skit
-end
-
-k1 = dx1/dy1
-m1 = (topRightSecondPoint(2)-k1*topRightSecondPoint(1));
-k2 = dx2/dy2;
-m2 = (bottomLeftSecondPoint(2)-k2*bottomLeftSecondPoint(1));
-
-fourthCornerX = (m2 - m1)/(k1 - k2);
-fourthCornerY = k1*fourthCornerX+m1;
-
-cornerPoints(4,:) = [fourthCornerX, fourthCornerY];
-
 

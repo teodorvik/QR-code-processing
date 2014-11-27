@@ -2,9 +2,9 @@
 
 % searches recursively through all subdirectories of the given directory
 % collecting a list of all file names it finds
-fileList = getAllFiles('images/set3', '*.png');
+fileList = getAllFiles('images/set5', '*.png');
 
-for i = 2:(size(fileList))
+for i = 1:(size(fileList))
     close all;
 	disp(sprintf('Test %d: ', i)), disp(fileList(i));
 	    
@@ -18,7 +18,7 @@ for i = 2:(size(fileList))
     encoded_str = unicode2native(str, 'UTF-8');
 		fwrite(fid, encoded_str, 'uint8'); 
 
-	pause();
+%     pause();
 end
 
 fclose(fid);

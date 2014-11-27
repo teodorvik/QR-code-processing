@@ -7,9 +7,9 @@ bitmap = zeros(41,41);
 [yMax, xMax] = size(image);
 
 % Used for debugging
-%figure;
-%imshow(image);
-%hold on;
+% figure;
+% imshow(image);
+% hold on;
 
 stepSize = yMax / 41;
 
@@ -32,18 +32,15 @@ for i = 1:41
     
         % Summarize a pixel area in the image
         tempImage = image(posY:posYNext, posX:posXNext); 
-        meanValue = mean(mean(tempImage));
+        bitmap(j,i) = mean(mean(tempImage));
         
         % Used for debugging
-        %plot(posX, posY, '-r+');
-        %plot(posXNext, posYNext, '-r+');
+%         plot(posX, posY, '-r+');
+%         plot(posXNext, posYNext, '-r+');
         
-        if (meanValue >= 0.48)
-            bitmap(j,i) = 1;
-        else
-            bitmap(j,i) = 0;
-        end
     end
 end
+
+bitmap = bitmap > 0.5;
 
 %hold off;
