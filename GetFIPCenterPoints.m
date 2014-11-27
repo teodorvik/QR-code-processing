@@ -3,8 +3,8 @@ function[centerPoints] = GetFIPCenterPoints(fipPoints)
     
     fipPoints = sortrows(fipPoints);
      
-    indexX = zeros(0,1); indexX = [indexX; 1];
-    indexY = zeros(0,1); indexY = [indexY; 1];
+    indexX = zeros(1,0); indexX = [indexX, 1];
+    indexY = zeros(1,0); indexY = [indexY, 1];
     %% Calculate distance on both axis
     for i = 2:length(fipPoints)
         distX(i) = sqrt((fipPoints(i-1,1)-fipPoints(i,1)).^2);
@@ -14,26 +14,26 @@ function[centerPoints] = GetFIPCenterPoints(fipPoints)
     %% X axis
     % Save the index of the largest distance in X
     ind = find(distX == max(distX(:)));
-    indexX = [indexX; ind];
+    indexX = [indexX, ind];
     
     % Save the second largest distance in X
     distX(ind) = 0;
     ind = find(distX == max(distX(:)));
-    indexX = [indexX; ind];
+    indexX = [indexX, ind(end)];
     
-    indexX = sort([indexX; length(fipPoints)]);
+    indexX = sort([indexX, length(fipPoints)]);
    
     %% Y axis
     % Save the index of the largest distance in Y
     ind = find(distY == max(distY(:)));
-    indexY = [indexY; ind];
+    indexY = [indexY, ind];
     
     % Save the second largest distance in Y
     distY(ind) = 0;
     ind = find(distY == max(distY(:)));
-    indexY = [indexY; ind];
+    indexY = [indexY, ind(end)];
     
-    indexY = sort([indexY; length(fipPoints)]);
+    indexY = sort([indexY, length(fipPoints)]);
     
     %% Extract the groups and calculate center points
     centerPoints = zeros(0,2);

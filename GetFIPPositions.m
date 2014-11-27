@@ -2,14 +2,6 @@
 % Input: Image
 % Output: FIP_positions [4,2] 
 function centerPoints = GetFIPPositions(image)
-%% Pre-processing
-% Apply Gaussian smoothing
-%gsize = floor(size(image)*0.05)
-%gaussian_filter = fspecial('gaussian',gsize, 0.7);
-%image = imfilter(image, gaussian_filter, 'replicate');
-%# Display
-%imshow(Ig) 
-
 % Remove noise
 image = wiener2(image, [3 3]);
 
@@ -20,7 +12,7 @@ edgeImage = Sobel(mat2gray(image), 0.5);
 fipPoints = FIPLineScan(edgeImage, 0.1);
 
 %% Find three clusters of points
-centerPoints = GetFIPCenterPoints(fipPoints)
+centerPoints = GetFIPCenterPoints(fipPoints);
 centerPoints = [centerPoints(:,2) centerPoints(:,1)];
 
 % figure;
