@@ -44,5 +44,5 @@ QRData = CreateBitmap(blackAndWhiteImage);
 % Put strout as the resulting text.
 % figure;
 % imshow(QRData);
-strout = ReadQR(QRData)
+strout = ReadQR(QRData);
 

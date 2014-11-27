@@ -4,8 +4,17 @@ dxPixel = (cornerPoints(2,1)-cornerPoints(1,1))/41;
 dyPixel = (cornerPoints(3,2)-cornerPoints(1,2))/41;
 apCenter = [cornerPoints(1,1)+dxPixel*34.5, cornerPoints(1,2)+dyPixel*34.5];
 % why does this get a warning?
-r = ceil(max([dxPixel dyPixel])*10);
+r = ceil(max([dxPixel dyPixel])*10)
+[rows cols] = size(image);
+if apCenter(2) + r > rows
+    r = rows - apCenter(2)
+end
+if apCenter(1) + r > cols
+    r = cols - apCenter(1)
+end
+
 apImageCrop = image((apCenter(2)-r):(apCenter(2)+r), (apCenter(1)-r):(apCenter(1)+r));
+imshow(apImageCrop);
 
 perfectAP = [1 1 1 1 1; 1 0 0 0 1; 1 0 1 0 1; 1 0 0 0 1; 1 1 1 1 1];
 perfectAP = imresize(perfectAP, [5*dyPixel 5*dxPixel], 'box');

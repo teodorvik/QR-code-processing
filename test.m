@@ -18,7 +18,7 @@ for i = 2:(size(fileList))
     encoded_str = unicode2native(str, 'UTF-8');
 		fwrite(fid, encoded_str, 'uint8'); 
 
-	pause();
+    pause();
 end
 
 fclose(fid);
