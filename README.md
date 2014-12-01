@@ -1,11 +1,11 @@
-QR-code-processing
-==================
+#QR-code-processing
 
-Process:
-http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6134743
+_Project in the course TNM034, Advanced Image Processing, at Linköpings University._
 
-Viola-Jones:
-http://en.wikipedia.org/wiki/Viola%E2%80%93Jones_object_detection_framework
+The program is written in Matlab. It detects and reads a QR code of version 6.
 
-ah push it! http://www.youtube.com/watch?v=vCadcBR95oU
-Vilket beat!
+### Authors
+- Teodor Vik
+- Oscar Westberg
+- Mikael Zackrisson
+- Anton Österblad
