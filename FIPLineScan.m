@@ -211,7 +211,14 @@ end
 fipLength = (sum(sum(verticalScanPoints(:,3))/length(verticalScanPoints) + ...
                 sum(horizontalScanPoints(:,3))/length(horizontalScanPoints) + ...
                 sum(diagonalScanPoints1(:,3))/length(diagonalScanPoints1) + ...
-                sum(diagonalScanPoints2(:,3))/length(diagonalScanPoints2))/4)*2;
+                sum(diagonalScanPoints2(:,3))/length(diagonalScanPoints2))/4)*2.7;
+
+% positionsTest = [verticalScanPoints; horizontalScanPoints; diagonalScanPoints1; diagonalScanPoints2];
+% figure;
+% imshow(binaryImage);
+% hold on;
+% plot(positionsTest(:,2),positionsTest(:,1),'r.','MarkerSize',12)
+% hold off
 
 positions = RemoveBadPoints(verticalScanPoints, horizontalScanPoints, ...
                             diagonalScanPoints1, diagonalScanPoints2, fipLength);

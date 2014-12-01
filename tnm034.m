@@ -11,7 +11,7 @@ end
 FIPPositions = GetFIPPositions(image);
 % imshow(image);
 % hold on;
-% plot(FIPPositions(3,1), FIPPositions(3,2),  'rs', 'MarkerSize', 10, 'LineWidth', 3);
+% plot(FIPPositions(:,1), FIPPositions(:,2),  'rs', 'MarkerSize', 10, 'LineWidth', 3);
 
 %% Get the four corners of QR-pattern.
 QRCorners = GetQRCorners(image, FIPPositions);
@@ -30,15 +30,15 @@ APPosition = GetAPPosition(image, QRCorners);
 
 %% Transform the given FIP:s for easier computation later.
 tformedImage = TransformAndCropQR(QRCorners, APPosition, image);
-% figure; imshow(tformedImage);
+%figure; imshow(tformedImage);
 
 % Compensate for uneven illumination. Returns an image containing only 0:s
 % and 1:s
 blackAndWhiteImage = RemoveIllumination(tformedImage);
-
+%figure;imshow(blackAndWhiteImage);
 % Create a 41*41 matrix of all points after rotation and translation.
 QRData = CreateBitmap(blackAndWhiteImage);
-
+%figure;imshow(QRData)
 % Determine text from perfect points by reading QR_data pixel by pixel.
 % Convert to ASCII symbols.
 % Put strout as the resulting text.

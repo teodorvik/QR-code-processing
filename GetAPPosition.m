@@ -33,4 +33,4 @@ ypeak = apCenter(2) - r + ypeak;
 % hold on;
 % plot(xpeak, ypeak, 'rx');
 % plot(apCenter(1), apCenter(2), 'bx');
-centerPoint = [xpeak, ypeak];
+centerPoint = [xpeak(end), ypeak(end)];
