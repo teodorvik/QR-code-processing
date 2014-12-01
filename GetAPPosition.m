@@ -1,7 +1,7 @@
 function centerPoint = GetAPPosition(image, cornerPoints)
 
-dxPixel = (cornerPoints(2,1)-cornerPoints(1,1))/41;
-dyPixel = (cornerPoints(3,2)-cornerPoints(1,2))/41;
+dxPixel = (abs(cornerPoints(2,1)-cornerPoints(1,1)))/41;
+dyPixel = (abs(cornerPoints(3,2)-cornerPoints(1,2)))/41;
 apCenter = round([cornerPoints(1,1)+dxPixel*34.5, cornerPoints(1,2)+dyPixel*34.5]);
 r = ceil(max([dxPixel dyPixel])*10);
 [rows cols] = size(image);
@@ -33,4 +33,4 @@ ypeak = apCenter(2) - r + ypeak;
 % hold on;
 % plot(xpeak, ypeak, 'rx');
 % plot(apCenter(1), apCenter(2), 'bx');
-centerPoint = [xpeak, ypeak];
+centerPoint = [xpeak(end), ypeak(end)];

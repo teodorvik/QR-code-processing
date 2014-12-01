@@ -29,6 +29,7 @@ T = maketform('projective', tPoints, perfect_qr);
 % xdata and ydata from imtransform are how much imtransform have translated
 % the image. In CropImage we compensate for those values.
 [tformedImage,xdata,ydata] = imtransform(image, T, 'XYScale', 1);
+
 tformedFips = perfect_qr;
 croppedImage = CropImage(int32(tformedFips), tformedImage, int32(xdata), int32(ydata));
 

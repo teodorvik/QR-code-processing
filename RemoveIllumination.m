@@ -3,6 +3,9 @@
 
 function[grayImage] = RemoveIllumination(image)
 
+% Expand white background over black QR-pixels
 background = imdilate(image, true(size(image, 1)));
+% Normalize image with background
 grayImage = image./background;
+% Make grayImage ones and zeros
 grayImage = grayImage > 0.44;
