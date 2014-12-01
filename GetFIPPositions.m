@@ -2,7 +2,10 @@
 % Input: Image
 % Output: FIP_positions [4,2] 
 function centerPoints = GetFIPPositions(image)
-% Remove noise
+%% Compensate for uneven illumination
+
+
+%% Remove noise
 image = wiener2(image, [3 3]);
 
 %% Apply sobel filter

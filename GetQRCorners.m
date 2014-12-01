@@ -97,9 +97,9 @@ centroid = sum(centerPoints)/3;
 % Use centroid to find the outmost corners of the fips. (Four corner points
 % are stored in allPoints for each FIP).
 cornerDistFromCentroid = sqrt((allCorners(1,:) - centroid(1)).^2+(allCorners(2,:) - centroid(2)).^2);
-cornerPoints(1,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(1:4))));
-cornerPoints(2,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(5:8))));
-cornerPoints(3,:) = allCorners(:,find(cornerDistFromCentroid==max(cornerDistFromCentroid(9:12))));
+cornerPoints(1,:) = allCorners(:,find(cornerDistFromCentroid(1:4)==max(cornerDistFromCentroid(1:4))));
+cornerPoints(2,:) = allCorners(:,find(cornerDistFromCentroid(5:8)==max(cornerDistFromCentroid(5:8)))+4);
+cornerPoints(3,:) = allCorners(:,find(cornerDistFromCentroid(9:12)==max(cornerDistFromCentroid(9:12)))+8);
 %% Calculate the distances between pair of points
 distancesCorners = pdist(cornerPoints(1:3,:));
 % distancesCorners(1) = distance between 2 and 1

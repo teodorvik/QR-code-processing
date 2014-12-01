@@ -2,7 +2,7 @@
 
 % searches recursively through all subdirectories of the given directory
 % collecting a list of all file names it finds
-fileList = getAllFiles('images/set5/', '*.png');
+fileList = getAllFiles('images/Images_Training_Illum/', '*.png');
 
 for i = 1:(size(fileList))
     close all;
