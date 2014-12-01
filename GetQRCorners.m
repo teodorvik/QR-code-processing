@@ -4,7 +4,9 @@ function cornerPoints = GetQRCorners(image, centerPoints)
 % located
 d = sort(pdist(centerPoints));
 d = d(2);
-r = int16(d*5/34);
+r = ceil(d*5/34);
+
+centerPoints = ceil(centerPoints);
 
 allCorners = zeros(2,12);
 for fipIndex = 1:3
@@ -78,13 +80,12 @@ for fipIndex = 1:3
         end
     end
      
-%     figure;
-%     imshow(Ifinal);
+%     figure; imshowpair(I, Ifinal, 'montage');
 %     hold on;
 %     plot(xCorners, yCorners,  'rs', 'MarkerSize', 10, 'LineWidth', 3);
-    
-    xTranslate = centerPoints(fipIndex,1) - double(r);
-    yTranslate = centerPoints(fipIndex,2) - double(r);
+
+    xTranslate = centerPoints(fipIndex,1) - r;
+    yTranslate = centerPoints(fipIndex,2) - r;
 
     % Add the four corner points found to the array
     allCorners(:,1+(fipIndex-1)*4:fipIndex*4) = [xCorners + xTranslate; yCorners + yTranslate];
