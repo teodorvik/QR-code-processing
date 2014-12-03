@@ -12,5 +12,6 @@ The program is written in Matlab. It detects and reads a QR code of version 6.
 
 ### Usage
 `str = tnm034(I)`
+
 `str` is a string with the decoded message of the QR code.
 `I` is a double-precision grayscale image.
