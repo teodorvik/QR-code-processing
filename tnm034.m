@@ -1,6 +1,8 @@
 % For when we want to test many images.
 function[strout] = tnm034(image)
 
+try
+    
 % Make sure the image is in grayscale
 [X, Y, dim] = size(image);
 if(dim == 3) 
@@ -45,4 +47,8 @@ QRData = CreateBitmap(blackAndWhiteImage);
 % figure;
 % imshow(QRData);
 strout = ReadQR(QRData);
+
+catch
+    strout = 'An error occurred.';
+end
 
