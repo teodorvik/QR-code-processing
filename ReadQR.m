@@ -48,7 +48,7 @@ for i = 1:(k-1)
 			s=s+1;
 end
 
-strout = strjoin(mess);
+strout = strjoin(mess,'');
 
 % TO-DO
 % It is only hardcoded so far and coded for a very specific case,
